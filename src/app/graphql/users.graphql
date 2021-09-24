@@ -6,3 +6,11 @@ query Users {
     email
   }
 }
+
+query Me {
+  me {
+    firstName
+    lastName
+    email
+  }
+}

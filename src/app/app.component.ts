@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { UsersGQL, UserType } from './graphql/generated/graphql';
+import { UsersGQL } from '@graphql/generated/models';
 
 @Component({
   selector: 'ssw-root',
