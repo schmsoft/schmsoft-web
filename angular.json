@@ -35,7 +35,9 @@
               "node_modules/primeng/resources/themes/saga-orange/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/prime-flex/_overrides.scss",
+              "node_modules/primeflex/primeflex.scss"
             ],
             "scripts": []
           },
@@ -103,7 +105,9 @@
               "node_modules/primeng/resources/themes/saga-orange/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/prime-flex/_overrides.scss",
+              "node_modules/primeflex/primeflex.scss"
             ],
             "scripts": []
           }
