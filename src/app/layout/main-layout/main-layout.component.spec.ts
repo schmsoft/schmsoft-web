@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ClrDropdownModule, ClrVerticalNavModule } from '@clr/angular';
+
 import { AppRoutingModule } from '@schmsoft/app-routing.module';
 
 import { MainLayoutComponent } from './main-layout.component';
@@ -11,7 +14,12 @@ describe('MainLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MainLayoutComponent],
-      imports: [AppRoutingModule],
+      imports: [
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ClrDropdownModule,
+        ClrVerticalNavModule,
+      ],
     }).compileComponents();
   });
 
