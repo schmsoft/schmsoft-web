@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { APOLLO_OPTIONS, APOLLO_NAMED_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+
+import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 
 import { environment } from '@env/environment';
 
+import { AuthInterceptor } from '../auth/interceptors/auth.interceptor';
+
 const defaultUri = environment.defaultGraphUri;
-const publicUri = environment.publicGraphUri;
 
 export function createApollo(
   httpLink: HttpLink,
@@ -33,6 +35,11 @@ export function createApollo(
         };
       },
       deps: [HttpLink],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     },
   ],
 })

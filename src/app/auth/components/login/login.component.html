@@ -1,0 +1,43 @@
+<div class="login-wrapper">
+  <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+    <section class="title">
+      Schmsoft
+      <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+    </section>
+    <div class="login-group">
+      <clr-input-container>
+        <label class="clr-sr-only">Username</label>
+        <input
+          type="text"
+          name="username"
+          clrInput
+          placeholder="Username"
+          formControlName="username"
+        />
+      </clr-input-container>
+      <clr-password-container>
+        <label class="clr-sr-only">Password</label>
+        <input
+          type="password"
+          name="password"
+          clrPassword
+          placeholder="Password"
+          formControlName="password"
+        />
+      </clr-password-container>
+
+      <div *ngIf="invalidCredentials" class="error active">
+        Invalid username or password
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="loginForm.invalid"
+        [clrLoading]="loginButtonState"
+      >
+        NEXT
+      </button>
+      <a href="javascript://" class="signup">Sign up for a Company ID</a>
+    </div>
+  </form>
+</div>

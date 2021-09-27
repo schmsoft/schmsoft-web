@@ -9,8 +9,15 @@ query Users {
 
 query Me {
   me {
+    id
     firstName
     lastName
     email
+  }
+}
+
+mutation Login($username: String!, $password: String!) {
+  tokenAuth(username: $username, password: $password) {
+    token
   }
 }

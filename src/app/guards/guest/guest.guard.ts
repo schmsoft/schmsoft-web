@@ -14,7 +14,7 @@ import { TokenStorageService } from '@schmsoft/auth/services/token-storage/token
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class GuestGuard implements CanActivate {
   constructor(
     private tokenService: TokenStorageService,
     private router: Router
@@ -31,8 +31,9 @@ export class AuthGuard implements CanActivate {
     const isLoggedIn = Boolean(this.tokenService.getToken());
 
     if (isLoggedIn) {
-      return true;
+      return this.router.createUrlTree(['/']);
     }
-    return this.router.createUrlTree(['/auth/login']);
+
+    return true;
   }
 }

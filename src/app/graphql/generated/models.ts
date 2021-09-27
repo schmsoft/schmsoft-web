@@ -2055,9 +2055,23 @@ export type MeQuery = {
   __typename?: 'Query';
   me?: Maybe<{
     __typename?: 'UserType';
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
+  }>;
+};
+
+export type LoginMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+export type LoginMutation = {
+  __typename?: 'Mutation';
+  tokenAuth?: Maybe<{
+    __typename?: 'ObtainJSONWebToken';
+    token?: Maybe<string>;
   }>;
 };
 
@@ -2085,6 +2099,7 @@ export class UsersGQL extends Apollo.Query<UsersQuery, UsersQueryVariables> {
 export const MeDocument = gql`
   query Me {
     me {
+      id
       firstName
       lastName
       email
@@ -2097,6 +2112,27 @@ export const MeDocument = gql`
 })
 export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
   document = MeDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const LoginDocument = gql`
+  mutation Login($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoginGQL extends Apollo.Mutation<
+  LoginMutation,
+  LoginMutationVariables
+> {
+  document = LoginDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

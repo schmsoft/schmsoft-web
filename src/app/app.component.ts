@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { PrimeNGConfig } from 'primeng/api';
-
-import { UsersGQL } from '@graphql/generated/models';
+import { MeGQL, UserType } from '@graphql/generated/models';
 
 @Component({
   selector: 'ssw-root',
@@ -14,15 +12,11 @@ import { UsersGQL } from '@graphql/generated/models';
 })
 export class AppComponent implements OnInit {
   title = 'schmsoft-web';
-  users$!: Observable<any>;
+  me$!: Observable<Partial<UserType> | undefined | null>;
 
-  constructor(
-    private usersGql: UsersGQL,
-    private primengConfig: PrimeNGConfig
-  ) {}
+  constructor(private meGql: MeGQL) {}
 
   ngOnInit() {
-    this.primengConfig.ripple = true;
-    this.users$ = this.usersGql.fetch().pipe(map(({ data }) => data.users));
+    this.me$ = this.meGql.fetch().pipe(map(({ data }) => data.me));
   }
 }
