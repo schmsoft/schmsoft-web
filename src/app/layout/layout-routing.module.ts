@@ -16,9 +16,16 @@ const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path: '',
+    path: 'core',
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('@schmsoft/core/core.module').then((m) => m.CoreModule),
+  },
+  {
+    path: '',
+    redirectTo: 'core',
+    pathMatch: 'full',
   },
 ];
 

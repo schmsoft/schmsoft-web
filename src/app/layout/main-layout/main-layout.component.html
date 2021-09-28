@@ -12,15 +12,15 @@
         >Interactive Analytics</a
       >
     </div>
-    <div class="header-actions" *ngIf="isLoggedIn">
-      <clr-dropdown>
+    <div class="header-actions header-actions--overflow" *ngIf="isLoggedIn">
+      <clr-dropdown clrPosition="bottom-right">
         <button
           class="nav-text"
           clrDropdownTrigger
           aria-label="open user profile"
         >
           Developer
-          <clr-icon shape="caret" direction="down"></clr-icon>
+          <clr-icon shape="angle down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-left">
           <button type="button" clrDropdownItem>Preferences</button>
@@ -40,69 +40,77 @@
       [clrVerticalNavCollapsible]="true"
       [(clrVerticalNavCollapsed)]="collapsed"
     >
+      <a clrVerticalNavLink routerLinkActive="active" routerLink="./credit">
+        <clr-icon shape="lightbulb" clrVerticalNavIcon></clr-icon>
+        Overview
+      </a>
       <clr-vertical-nav-group routerLinkActive="active">
-        <clr-icon shape="user" clrVerticalNavIcon></clr-icon>
-        Normal
+        <clr-icon shape="employee-group" clrVerticalNavIcon></clr-icon>
+        People & Businesses
         <clr-vertical-nav-group-children>
           <a
             clrVerticalNavLink
             routerLink="./normal/pidgey"
             routerLinkActive="active"
           >
-            Pidgey
+            Clients
           </a>
           <a
             clrVerticalNavLink
             routerLink="./normal/snorlax"
             routerLinkActive="active"
           >
-            Snorlax
+            Businesses
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
+
       <clr-vertical-nav-group routerLinkActive="active">
-        <clr-icon shape="flame" clrVerticalNavIcon></clr-icon>
-        Fire
+        <clr-icon shape="form" clrVerticalNavIcon></clr-icon>
+        Loans
         <clr-vertical-nav-group-children>
           <a
             clrVerticalNavLink
             routerLink="./fire/charmander"
             routerLinkActive="active"
           >
-            Charmander
+            Applications
           </a>
           <a
             clrVerticalNavLink
             routerLink="./fire/charizard"
             routerLinkActive="active"
           >
-            Charizard
+            Active Loans
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
       <clr-vertical-nav-group routerLinkActive="active">
-        <clr-icon shape="bolt" clrVerticalNavIcon></clr-icon>
-        Electric
+        <clr-icon shape="wallet" clrVerticalNavIcon></clr-icon>
+        Payments
         <clr-vertical-nav-group-children>
           <a
             clrVerticalNavLink
             routerLink="./electric/pikachu"
             routerLinkActive="active"
           >
-            Pikachu
+            Repayments
           </a>
           <a
             clrVerticalNavLink
             routerLink="./electric/raichu"
             routerLinkActive="active"
           >
-            Raichu
+            Disbursements
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
+
+      <div class="nav-divider"></div>
+
       <a clrVerticalNavLink routerLinkActive="active" routerLink="./credit">
-        <clr-icon shape="certificate" clrVerticalNavIcon></clr-icon>
-        Credit
+        <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
+        Settings
       </a>
     </clr-vertical-nav>
 
