@@ -10,6 +10,8 @@ import {
 import { LayoutRoutingModule } from './layout-routing.module';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { HeaderModule } from './header/header.module';
+import { AsideModule } from './aside/aside.module';
 
 @NgModule({
   declarations: [AuthLayoutComponent, MainLayoutComponent],
@@ -19,6 +21,8 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
     ClrIconModule,
     ClrVerticalNavModule,
     ClrDropdownModule,
+    HeaderModule,
+    AsideModule,
   ],
 })
 export class LayoutModule {}

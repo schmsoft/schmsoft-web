@@ -1,0 +1,34 @@
+<header class="header-6">
+  <div class="branding">
+    <a href="javascript://" class="nav-link">
+      <clr-icon shape="angle-double"></clr-icon>
+      <span class="title">Schmsoft</span>
+    </a>
+  </div>
+  <div class="header-nav">
+    <a href="javascript://" class="active nav-link nav-text">Core</a>
+    <a href="javascript://" class="nav-link nav-text">Interactive Analytics</a>
+  </div>
+  <div class="header-actions header-actions--overflow" *ngIf="isLoggedIn">
+    <clr-dropdown clrPosition="bottom-left">
+      <button
+        *ngIf="$me | async as me"
+        class="nav-text"
+        clrDropdownTrigger
+        aria-label="open user profile"
+      >
+        {{ me.firstName }} {{ me.lastName }}
+        <clr-icon shape="angle down"></clr-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-left">
+        <button type="button" clrDropdownItem>Preferences</button>
+
+        <div class="dropdown-divider"></div>
+
+        <button type="button" clrDropdownItem (click)="logout()">
+          Log out
+        </button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>

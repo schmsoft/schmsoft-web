@@ -5,7 +5,6 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpClient,
-  HttpResponse,
   HttpEventType,
 } from '@angular/common/http';
 
@@ -20,6 +19,7 @@ import { Router } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
   private readonly AUTH_HEADER = 'Authorization';
   private readonly LOGIN_EXCEPTION_CODE = 'user-not-logged-in';
+  private readonly TOKEN_TYPE = 'JWT';
 
   private token!: Token;
 
@@ -107,7 +107,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return request.clone({
       headers: request.headers.set(
         this.AUTH_HEADER,
-        `${this.token.type} ${this.token.access_token}`
+        `${this.TOKEN_TYPE} ${this.token.token}`
       ),
     });
   }

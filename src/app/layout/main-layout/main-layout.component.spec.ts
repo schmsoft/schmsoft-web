@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClrDropdownModule, ClrVerticalNavModule } from '@clr/angular';
 
 import { AppRoutingModule } from '@schmsoft/app-routing.module';
+import { AsideModule } from '../aside/aside.module';
+import { HeaderModule } from '../header/header.module';
 
 import { MainLayoutComponent } from './main-layout.component';
 
@@ -19,6 +21,8 @@ describe('MainLayoutComponent', () => {
         AppRoutingModule,
         ClrDropdownModule,
         ClrVerticalNavModule,
+        AsideModule,
+        HeaderModule,
       ],
     }).compileComponents();
   });
