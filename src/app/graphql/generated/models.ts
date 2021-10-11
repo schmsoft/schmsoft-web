@@ -1311,13 +1311,18 @@ export type BusinessType = {
 export type Mutation = {
   __typename?: 'Mutation';
   refreshToken?: Maybe<Refresh>;
+  revokeToken?: Maybe<Revoke>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
   verifyToken?: Maybe<Verify>;
 };
 
 export type MutationRefreshTokenArgs = {
-  token: Scalars['String'];
+  refreshToken: Scalars['String'];
+};
+
+export type MutationRevokeTokenArgs = {
+  refreshToken: Scalars['String'];
 };
 
 export type MutationTokenAuthArgs = {
@@ -1332,6 +1337,7 @@ export type MutationVerifyTokenArgs = {
 /** Obtain JSON Web Token mutation */
 export type ObtainJsonWebToken = {
   __typename?: 'ObtainJSONWebToken';
+  refreshToken?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
 };
 
@@ -2014,7 +2020,13 @@ export type Query = {
 export type Refresh = {
   __typename?: 'Refresh';
   payload?: Maybe<Scalars['GenericScalar']>;
+  refreshToken?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
+};
+
+export type Revoke = {
+  __typename?: 'Revoke';
+  revoked?: Maybe<Scalars['Int']>;
 };
 
 export type UserType = {
@@ -2072,6 +2084,21 @@ export type LoginMutation = {
   tokenAuth?: Maybe<{
     __typename?: 'ObtainJSONWebToken';
     token?: Maybe<string>;
+    refreshToken?: Maybe<string>;
+  }>;
+};
+
+export type RefreshTokenMutationVariables = Exact<{
+  refreshToken: Scalars['String'];
+}>;
+
+export type RefreshTokenMutation = {
+  __typename?: 'Mutation';
+  refreshToken?: Maybe<{
+    __typename?: 'Refresh';
+    token?: Maybe<string>;
+    payload?: Maybe<any>;
+    refreshToken?: Maybe<string>;
   }>;
 };
 
@@ -2121,6 +2148,7 @@ export const LoginDocument = gql`
   mutation Login($username: String!, $password: String!) {
     tokenAuth(username: $username, password: $password) {
       token
+      refreshToken
     }
   }
 `;
@@ -2133,6 +2161,29 @@ export class LoginGQL extends Apollo.Mutation<
   LoginMutationVariables
 > {
   document = LoginDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const RefreshTokenDocument = gql`
+  mutation RefreshToken($refreshToken: String!) {
+    refreshToken(refreshToken: $refreshToken) {
+      token
+      payload
+      refreshToken
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class RefreshTokenGQL extends Apollo.Mutation<
+  RefreshTokenMutation,
+  RefreshTokenMutationVariables
+> {
+  document = RefreshTokenDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

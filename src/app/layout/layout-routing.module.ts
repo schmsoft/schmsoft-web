@@ -27,6 +27,10 @@ const routes: Routes = [
     redirectTo: 'core',
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    redirectTo: 'core',
+  },
 ];
 
 @NgModule({

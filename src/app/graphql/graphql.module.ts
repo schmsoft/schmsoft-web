@@ -12,18 +12,6 @@ import { AuthInterceptor } from '../auth/interceptors/auth.interceptor';
 
 const defaultUri = environment.defaultGraphUri;
 
-export function createApollo(
-  httpLink: HttpLink,
-  uri: string,
-  clientName?: string
-): ApolloClientOptions<any> {
-  return {
-    link: httpLink.create({ uri }),
-    cache: new InMemoryCache(),
-    name: clientName,
-  };
-}
-
 @NgModule({
   providers: [
     {

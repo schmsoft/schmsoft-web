@@ -6,20 +6,25 @@ import {
   HttpInterceptor,
   HttpClient,
   HttpEventType,
+  HttpHeaders,
 } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, finalize, switchMap, take, tap } from 'rxjs/operators';
+import { filter, finalize, map, switchMap, take, tap } from 'rxjs/operators';
 
 import { Token } from '../models/token';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
 import { Router } from '@angular/router';
+import { RefreshTokenGQL } from '@graphql/generated/models';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private readonly AUTH_HEADER = 'Authorization';
   private readonly LOGIN_EXCEPTION_CODE = 'user-not-logged-in';
+  private readonly SIGNATURE_EXCEPTION_MESSAGE = 'Signature has expired';
   private readonly TOKEN_TYPE = 'JWT';
+  private readonly X_CUSTOM_HEADER = 'X-Custom-Header';
+  private readonly X_CUSTOM_HEADER_VALUE = 'custom-value';
 
   private token!: Token;
 
@@ -29,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
   );
 
   constructor(
-    private httpClient: HttpClient,
+    private refreshTokenGQL: RefreshTokenGQL,
     private tokenStorageService: TokenStorageService,
     private router: Router
   ) {}
@@ -55,12 +60,18 @@ export class AuthInterceptor implements HttpInterceptor {
             )
           );
 
-          if (needsToLogin) {
-            if (!this.token) {
-              this.redirectToLogin();
-              return next.handle(request);
-            }
+          if (needsToLogin && !this.token) {
+            this.redirectToLogin();
+            return of(event);
+          }
 
+          const tokenNeedsRefreshing = Boolean(
+            errors.find(
+              (error) => error.message === this.SIGNATURE_EXCEPTION_MESSAGE
+            )
+          );
+
+          if (tokenNeedsRefreshing) {
             if (this.isRefreshingToken) {
               return this.refreshTokenSubject.pipe(
                 filter((result) => result !== null),
@@ -92,7 +103,7 @@ export class AuthInterceptor implements HttpInterceptor {
           }
         }
 
-        return next.handle(request);
+        return of(event);
       })
     );
   }
@@ -104,6 +115,15 @@ export class AuthInterceptor implements HttpInterceptor {
       return request;
     }
 
+    if (request.headers.has(this.X_CUSTOM_HEADER)) {
+      return request.clone({
+        headers: request.headers.delete(
+          this.X_CUSTOM_HEADER,
+          this.X_CUSTOM_HEADER_VALUE
+        ),
+      });
+    }
+
     return request.clone({
       headers: request.headers.set(
         this.AUTH_HEADER,
@@ -112,8 +132,32 @@ export class AuthInterceptor implements HttpInterceptor {
     });
   }
 
-  private refreshToken(): Observable<boolean> {
-    return of(false);
+  private refreshToken(): Observable<any> {
+    console.log('Token', this.token);
+
+    return this.refreshTokenGQL
+      .mutate(
+        { refreshToken: this.token.refreshToken },
+        {
+          context: {
+            headers: new HttpHeaders().set(
+              this.X_CUSTOM_HEADER,
+              this.X_CUSTOM_HEADER_VALUE
+            ),
+          },
+        }
+      )
+      .pipe(
+        map(({ data }) => data?.refreshToken),
+        tap((token: any) => {
+          if (!!token) {
+            this.tokenStorageService.saveToken(token);
+          } else {
+            this.redirectToLogin();
+          }
+        }),
+        map((token) => !!token)
+      );
   }
 
   private redirectToLogin() {

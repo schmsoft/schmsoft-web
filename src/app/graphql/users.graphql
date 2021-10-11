@@ -19,5 +19,14 @@ query Me {
 mutation Login($username: String!, $password: String!) {
   tokenAuth(username: $username, password: $password) {
     token
+    refreshToken
+  }
+}
+
+mutation RefreshToken($refreshToken: String!) {
+  refreshToken(refreshToken: $refreshToken) {
+    token
+    payload
+    refreshToken
   }
 }
