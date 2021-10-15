@@ -9,3 +9,8 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.page-header {
+  margin-top: var(--cds-token-space-size-5, 0.4rem) !important;
+  margin-bottom: var(--cds-token-space-size-7, 0.8rem) !important;
+}

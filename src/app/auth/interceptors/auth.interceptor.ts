@@ -22,6 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private readonly AUTH_HEADER = 'Authorization';
   private readonly LOGIN_EXCEPTION_CODE = 'user-not-logged-in';
   private readonly SIGNATURE_EXCEPTION_MESSAGE = 'Signature has expired';
+  private readonly REFRESH_TOKEN_EXPIRED = 'Refresh token is expired';
   private readonly TOKEN_TYPE = 'JWT';
   private readonly X_CUSTOM_HEADER = 'X-Custom-Header';
   private readonly X_CUSTOM_HEADER_VALUE = 'custom-value';
@@ -56,11 +57,13 @@ export class AuthInterceptor implements HttpInterceptor {
           const errors = event.body.errors as any[];
           const needsToLogin = Boolean(
             errors.find(
-              (error: any) => error.message === this.LOGIN_EXCEPTION_CODE
+              (error: any) =>
+                error.message === this.LOGIN_EXCEPTION_CODE ||
+                error.message === this.REFRESH_TOKEN_EXPIRED
             )
           );
 
-          if (needsToLogin && !this.token) {
+          if (needsToLogin || !this.token) {
             this.redirectToLogin();
             return of(event);
           }
@@ -133,8 +136,6 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private refreshToken(): Observable<any> {
-    console.log('Token', this.token);
-
     return this.refreshTokenGQL
       .mutate(
         { refreshToken: this.token.refreshToken },
@@ -161,6 +162,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private redirectToLogin() {
+    this.tokenStorageService.removeToken();
     this.router.navigate(['/auth/login']);
   }
 }
