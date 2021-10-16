@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ClrLayoutModule, ClrMainContainerModule } from '@clr/angular';
 import { AppRoutingModule } from '@schmsoft/app-routing.module';
 
 import { HeaderComponent } from './header.component';

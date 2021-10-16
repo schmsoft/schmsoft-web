@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClrVerticalNavModule } from '@clr/angular';
+import { ClrLayoutModule, ClrVerticalNavModule } from '@clr/angular';
 
 import { AsideComponent } from './aside.component';
 
@@ -11,7 +11,7 @@ describe('AsideComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AsideComponent],
-      imports: [BrowserAnimationsModule, ClrVerticalNavModule],
+      imports: [BrowserAnimationsModule, ClrVerticalNavModule, ClrLayoutModule],
     }).compileComponents();
   });
 

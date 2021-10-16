@@ -1,7 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ClrDropdownModule, ClrVerticalNavModule } from '@clr/angular';
+import {
+  ClrDropdownModule,
+  ClrLayoutModule,
+  ClrMainContainerModule,
+  ClrVerticalNavModule,
+} from '@clr/angular';
 
 import { AppRoutingModule } from '@schmsoft/app-routing.module';
 import { AsideModule } from '../aside/aside.module';
@@ -23,6 +28,8 @@ describe('MainLayoutComponent', () => {
         ClrVerticalNavModule,
         AsideModule,
         HeaderModule,
+        ClrMainContainerModule,
+        ClrLayoutModule,
       ],
     }).compileComponents();
   });
