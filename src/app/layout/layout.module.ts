@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import {
   ClrDropdownModule,
+  ClrHeader,
   ClrIconModule,
+  ClrLayoutModule,
+  ClrMainContainerModule,
   ClrVerticalNavModule,
 } from '@clr/angular';
 
@@ -23,6 +26,8 @@ import { AsideModule } from './aside/aside.module';
     ClrDropdownModule,
     HeaderModule,
     AsideModule,
+    ClrMainContainerModule,
+    ClrLayoutModule,
   ],
 })
 export class LayoutModule {}

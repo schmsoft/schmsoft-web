@@ -1,11 +1,10 @@
-<div class="main-container">
+<clr-main-container>
   <ssw-header></ssw-header>
 
   <div class="content-container">
-    <ssw-aside [collapsed]="collapsedAside"></ssw-aside>
-
-    <div class="content-area">
+    <ssw-aside></ssw-aside>
+    <main class="content-area">
       <router-outlet></router-outlet>
-    </div>
+    </main>
   </div>
-</div>
+</clr-main-container>

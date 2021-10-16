@@ -1,14 +1,23 @@
-<header class="header-6">
+<clr-header class="header-6">
   <div class="branding">
-    <a href="javascript://" class="nav-link">
+    <a routerLink="/" class="nav-link">
       <clr-icon shape="angle-double"></clr-icon>
       <span class="title">Schmsoft</span>
     </a>
   </div>
-  <div class="header-nav">
-    <a href="javascript://" class="active nav-link nav-text">Core</a>
-    <a href="javascript://" class="nav-link nav-text">Interactive Analytics</a>
+
+  <div class="header-nav" [clr-nav-level]="1">
+    <a class="nav-link nav-text" routerLink="/core" routerLinkActive="active"
+      ><span>Core</span></a
+    >
+    <a
+      class="nav-link nav-text"
+      routerLink="/analytics"
+      routerLinkActive="active"
+      ><span>Interactive Analytics</span></a
+    >
   </div>
+
   <div class="header-actions header-actions--overflow" *ngIf="isLoggedIn">
     <clr-dropdown clrPosition="bottom-left">
       <button
@@ -31,4 +40,4 @@
       </clr-dropdown-menu>
     </clr-dropdown>
   </div>
-</header>
+</clr-header>

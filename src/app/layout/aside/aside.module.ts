@@ -2,12 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AsideComponent } from './aside.component';
-import { ClrIconModule, ClrVerticalNavModule } from '@clr/angular';
+import {
+  ClrIconModule,
+  ClrLayoutModule,
+  ClrVerticalNavModule,
+} from '@clr/angular';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AsideComponent],
-  imports: [CommonModule, ClrIconModule, ClrVerticalNavModule, RouterModule],
+  imports: [
+    CommonModule,
+    ClrIconModule,
+    ClrVerticalNavModule,
+    RouterModule,
+    ClrLayoutModule,
+  ],
   exports: [AsideComponent],
 })
 export class AsideModule {}
