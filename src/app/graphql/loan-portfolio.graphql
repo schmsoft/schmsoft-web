@@ -1,0 +1,13 @@
+query LoanPortolios {
+  loanPortfolios {
+    name
+    description
+  }
+}
+
+query LoanPortolio($id: ID!) {
+  loanPortfolio(id: $id) {
+    name
+    description
+  }
+}

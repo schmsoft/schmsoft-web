@@ -32,6 +32,28 @@ export type Scalars = {
    * String, Boolean, Int, Float, List or Object.
    */
   GenericScalar: any;
+  /**
+   * Create scalar that ignores normal serialization/deserialization, since
+   * that will be handled by the multipart request spec
+   */
+  Upload: any;
+};
+
+export type AddBusinessMutation = {
+  __typename?: 'AddBusinessMutation';
+  business?: Maybe<BusinessType>;
+};
+
+export type AddLoanPortlioMutation = {
+  __typename?: 'AddLoanPortlioMutation';
+  portfolio?: Maybe<LoanPortfolioType>;
+};
+
+export type AddressInput = {
+  id?: Maybe<Scalars['ID']>;
+  locality?: Maybe<LocalityInput>;
+  route?: Maybe<Scalars['String']>;
+  streetNumber?: Maybe<Scalars['String']>;
 };
 
 /** An enumeration. */
@@ -663,6 +685,20 @@ export enum BusinessDailySalesCurrency {
   /** Zimbabwean Dollar (2008) */
   Zwr = 'ZWR',
 }
+
+export type BusinessInput = {
+  businessType: Scalars['String'];
+  currentLocation?: Maybe<AddressInput>;
+  dailySales?: Maybe<Scalars['Decimal']>;
+  dailySalesCurrency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  operatingCapital?: Maybe<Scalars['Decimal']>;
+  operatingCapitalCurrency?: Maybe<Scalars['String']>;
+  registrationNumber?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  yearsInCurrentLocation?: Maybe<Scalars['Int']>;
+};
 
 /** An enumeration. */
 export enum BusinessOperatingCapitalCurrency {
@@ -1308,13 +1344,63 @@ export type BusinessType = {
   yearsInCurrentLocation: Scalars['Int'];
 };
 
+export type CountryInput = {
+  code?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type LoanPortfolioInput = {
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+/** An enumeration. */
+export enum LoanPortfolioStatus {
+  /** Active */
+  Active = 'ACTIVE',
+  /** Closed */
+  Closed = 'CLOSED',
+}
+
+export type LoanPortfolioType = {
+  __typename?: 'LoanPortfolioType';
+  created: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  isRemoved: Scalars['Boolean'];
+  modified: Scalars['DateTime'];
+  name: Scalars['String'];
+  owners: Array<UserType>;
+  status: LoanPortfolioStatus;
+};
+
+export type LocalityInput = {
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  state?: Maybe<StateInput>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  addBusiness?: Maybe<AddBusinessMutation>;
+  addLoanPortfolio?: Maybe<AddLoanPortlioMutation>;
   refreshToken?: Maybe<Refresh>;
   revokeToken?: Maybe<Revoke>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
+  updateLoanPortfolio?: Maybe<UpdateLoanPortfolioMutation>;
   verifyToken?: Maybe<Verify>;
+};
+
+export type MutationAddBusinessArgs = {
+  business?: Maybe<BusinessInput>;
+  owner?: Maybe<OwnerInput>;
+};
+
+export type MutationAddLoanPortfolioArgs = {
+  portfolio: LoanPortfolioInput;
 };
 
 export type MutationRefreshTokenArgs = {
@@ -1328,6 +1414,11 @@ export type MutationRevokeTokenArgs = {
 export type MutationTokenAuthArgs = {
   password: Scalars['String'];
   username: Scalars['String'];
+};
+
+export type MutationUpdateLoanPortfolioArgs = {
+  portfolio: LoanPortfolioInput;
+  portfolioId: Scalars['ID'];
 };
 
 export type MutationVerifyTokenArgs = {
@@ -1360,6 +1451,19 @@ export enum OwnerIdentificationMethod {
   /** Passport */
   Passport = 'PASSPORT',
 }
+
+export type OwnerInput = {
+  businessId?: Maybe<Scalars['ID']>;
+  gender: Scalars['String'];
+  identificationMethod: Scalars['String'];
+  identificationNumber: Scalars['String'];
+  maritalStatus?: Maybe<Scalars['String']>;
+  numberOfDependants?: Maybe<Scalars['Int']>;
+  passportPhoto?: Maybe<Scalars['Upload']>;
+  phoneNumber: Scalars['String'];
+  roleDefinition?: Maybe<Scalars['String']>;
+  totalMonthlyIncome?: Maybe<Scalars['Decimal']>;
+};
 
 /** An enumeration. */
 export enum OwnerMaritalStatus {
@@ -2011,10 +2115,25 @@ export type OwnerType = {
 
 export type Query = {
   __typename?: 'Query';
+  business?: Maybe<BusinessType>;
   businessOwners?: Maybe<Array<Maybe<OwnerType>>>;
   businesses?: Maybe<Array<Maybe<BusinessType>>>;
+  loanPortfolio?: Maybe<LoanPortfolioType>;
+  loanPortfolios?: Maybe<Array<Maybe<LoanPortfolioType>>>;
   me?: Maybe<UserType>;
   users?: Maybe<Array<Maybe<UserType>>>;
+};
+
+export type QueryBusinessArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryLoanPortfolioArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryLoanPortfoliosArgs = {
+  status?: Maybe<Scalars['String']>;
 };
 
 export type Refresh = {
@@ -2027,6 +2146,18 @@ export type Refresh = {
 export type Revoke = {
   __typename?: 'Revoke';
   revoked?: Maybe<Scalars['Int']>;
+};
+
+export type StateInput = {
+  code?: Maybe<Scalars['String']>;
+  country?: Maybe<CountryInput>;
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type UpdateLoanPortfolioMutation = {
+  __typename?: 'UpdateLoanPortfolioMutation';
+  portfolio?: Maybe<LoanPortfolioType>;
 };
 
 export type UserType = {
@@ -2042,6 +2173,34 @@ export type UserType = {
 export type Verify = {
   __typename?: 'Verify';
   payload?: Maybe<Scalars['GenericScalar']>;
+};
+
+export type LoanPortoliosQueryVariables = Exact<{ [key: string]: never }>;
+
+export type LoanPortoliosQuery = {
+  __typename?: 'Query';
+  loanPortfolios?: Maybe<
+    Array<
+      Maybe<{
+        __typename?: 'LoanPortfolioType';
+        name: string;
+        description: string;
+      }>
+    >
+  >;
+};
+
+export type LoanPortolioQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type LoanPortolioQuery = {
+  __typename?: 'Query';
+  loanPortfolio?: Maybe<{
+    __typename?: 'LoanPortfolioType';
+    name: string;
+    description: string;
+  }>;
 };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -2102,6 +2261,50 @@ export type RefreshTokenMutation = {
   }>;
 };
 
+export const LoanPortoliosDocument = gql`
+  query LoanPortolios {
+    loanPortfolios {
+      name
+      description
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoanPortoliosGQL extends Apollo.Query<
+  LoanPortoliosQuery,
+  LoanPortoliosQueryVariables
+> {
+  document = LoanPortoliosDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const LoanPortolioDocument = gql`
+  query LoanPortolio($id: ID!) {
+    loanPortfolio(id: $id) {
+      name
+      description
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoanPortolioGQL extends Apollo.Query<
+  LoanPortolioQuery,
+  LoanPortolioQueryVariables
+> {
+  document = LoanPortolioDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UsersDocument = gql`
   query Users {
     users {
