@@ -5,9 +5,17 @@ import { OverviewComponent } from '@schmsoft/reporting/overview/overview.compone
 
 const routes: Routes = [
   {
+    path: 'clients',
+    loadChildren: () =>
+      import('@schmsoft/client/client.module').then((m) => m.ClientModule),
+  },
+
+  {
     path: 'settings',
     loadChildren: () =>
-      import('../settings/settings.module').then((m) => m.SettingsModule),
+      import('@schmsoft/settings/settings.module').then(
+        (m) => m.SettingsModule
+      ),
   },
 
   {

@@ -23,6 +23,15 @@ const routes: Routes = [
       import('@schmsoft/core/core.module').then((m) => m.CoreModule),
   },
   {
+    path: 'analytics',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('@schmsoft/analytics/analytics.module').then(
+        (m) => m.AnalyticsModule
+      ),
+  },
+  {
     path: '',
     redirectTo: 'core',
     pathMatch: 'full',

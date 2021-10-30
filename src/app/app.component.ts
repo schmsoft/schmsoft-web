@@ -18,5 +18,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.me$ = this.meGql.fetch().pipe(map(({ data }) => data.me));
+
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.setAttribute('cds-theme', 'dark');
+    }
   }
 }

@@ -4939,35 +4939,6 @@
       },
       {
         "kind": "ENUM",
-        "name": "OwnerGender",
-        "description": "An enumeration.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "FEMALE",
-            "description": "Female",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MALE",
-            "description": "Male",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OTHER",
-            "description": "Other",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
         "name": "OwnerIdentificationMethod",
         "description": "An enumeration.",
         "fields": null,
@@ -4975,7 +4946,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "DRIVER_LICENSE",
+            "name": "DRIVER_S_LICENSE",
             "description": "Driver License",
             "isDeprecated": false,
             "deprecationReason": null
@@ -4987,7 +4958,7 @@
             "deprecationReason": null
           },
           {
-            "name": "PASSPORT",
+            "name": "PASSOPORT",
             "description": "Passport",
             "isDeprecated": false,
             "deprecationReason": null
@@ -5140,41 +5111,6 @@
         ],
         "interfaces": null,
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "OwnerMaritalStatus",
-        "description": "An enumeration.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "DIVORCED",
-            "description": "Divorced",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MARRIED",
-            "description": "Married",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "SINGLE",
-            "description": "Single",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "WIDOWED",
-            "description": "Widowed",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       },
       {
@@ -7066,8 +7002,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "OwnerGender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7142,8 +7078,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "OwnerMaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7235,7 +7171,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Decimal",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7799,7 +7735,20 @@
           {
             "name": "args",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "includeDeprecated",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": "false",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,

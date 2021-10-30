@@ -4,7 +4,12 @@
   class="nav-trigger--bottom"
   [clr-nav-level]="2"
 >
-  <a clrVerticalNavLink routerLinkActive="active" routerLink="/core/">
+  <a
+    clrVerticalNavLink
+    routerLinkActive="active"
+    routerLink="/core/"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
     <clr-icon shape="lightbulb" clrVerticalNavIcon></clr-icon>
     Overview
   </a>
@@ -14,7 +19,7 @@
     <clr-vertical-nav-group-children>
       <a
         clrVerticalNavLink
-        routerLink="./normal/pidgey"
+        routerLink="/core/clients"
         routerLinkActive="active"
       >
         Clients

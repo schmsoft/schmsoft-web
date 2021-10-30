@@ -1433,23 +1433,13 @@ export type ObtainJsonWebToken = {
 };
 
 /** An enumeration. */
-export enum OwnerGender {
-  /** Female */
-  Female = 'FEMALE',
-  /** Male */
-  Male = 'MALE',
-  /** Other */
-  Other = 'OTHER',
-}
-
-/** An enumeration. */
 export enum OwnerIdentificationMethod {
   /** Driver License */
-  DriverLicense = 'DRIVER_LICENSE',
+  DriverSLicense = 'DRIVER_S_LICENSE',
   /** National Id */
   NationalId = 'NATIONAL_ID',
   /** Passport */
-  Passport = 'PASSPORT',
+  Passoport = 'PASSOPORT',
 }
 
 export type OwnerInput = {
@@ -1464,18 +1454,6 @@ export type OwnerInput = {
   roleDefinition?: Maybe<Scalars['String']>;
   totalMonthlyIncome?: Maybe<Scalars['Decimal']>;
 };
-
-/** An enumeration. */
-export enum OwnerMaritalStatus {
-  /** Divorced */
-  Divorced = 'DIVORCED',
-  /** Married */
-  Married = 'MARRIED',
-  /** Single */
-  Single = 'SINGLE',
-  /** Widowed */
-  Widowed = 'WIDOWED',
-}
 
 /** An enumeration. */
 export enum OwnerTotalMonthlyIncomeCurrency {
@@ -2097,18 +2075,18 @@ export type OwnerType = {
   __typename?: 'OwnerType';
   business: BusinessType;
   created: Scalars['DateTime'];
-  gender?: Maybe<OwnerGender>;
+  gender?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   identificationMethod: OwnerIdentificationMethod;
   identificationNumber: Scalars['String'];
   isRemoved: Scalars['Boolean'];
-  maritalStatus?: Maybe<OwnerMaritalStatus>;
+  maritalStatus?: Maybe<Scalars['String']>;
   modified: Scalars['DateTime'];
   numberOfDependants: Scalars['Int'];
   passportPhoto: Scalars['String'];
   phoneNumber: Scalars['String'];
   roleDefinition: Scalars['String'];
-  totalMonthlyIncome?: Maybe<Scalars['Decimal']>;
+  totalMonthlyIncome?: Maybe<Scalars['String']>;
   totalMonthlyIncomeCurrency: OwnerTotalMonthlyIncomeCurrency;
   user: UserType;
 };
@@ -2173,6 +2151,34 @@ export type UserType = {
 export type Verify = {
   __typename?: 'Verify';
   payload?: Maybe<Scalars['GenericScalar']>;
+};
+
+export type ClientsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ClientsQuery = {
+  __typename?: 'Query';
+  businessOwners?: Maybe<
+    Array<
+      Maybe<{
+        __typename?: 'OwnerType';
+        id: string;
+        created: any;
+        modified: any;
+        isRemoved: boolean;
+        roleDefinition: string;
+        identificationMethod: OwnerIdentificationMethod;
+        identificationNumber: string;
+        phoneNumber: string;
+        totalMonthlyIncomeCurrency: OwnerTotalMonthlyIncomeCurrency;
+        totalMonthlyIncome?: Maybe<string>;
+        numberOfDependants: number;
+        gender?: Maybe<string>;
+        maritalStatus?: Maybe<string>;
+        passportPhoto: string;
+        business: { __typename?: 'BusinessType'; name: string };
+      }>
+    >
+  >;
 };
 
 export type LoanPortoliosQueryVariables = Exact<{ [key: string]: never }>;
@@ -2261,6 +2267,43 @@ export type RefreshTokenMutation = {
   }>;
 };
 
+export const ClientsDocument = gql`
+  query Clients {
+    businessOwners {
+      id
+      created
+      modified
+      isRemoved
+      roleDefinition
+      business {
+        name
+      }
+      identificationMethod
+      identificationNumber
+      phoneNumber
+      totalMonthlyIncomeCurrency
+      totalMonthlyIncome
+      numberOfDependants
+      gender
+      maritalStatus
+      passportPhoto
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ClientsGQL extends Apollo.Query<
+  ClientsQuery,
+  ClientsQueryVariables
+> {
+  document = ClientsDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const LoanPortoliosDocument = gql`
   query LoanPortolios {
     loanPortfolios {

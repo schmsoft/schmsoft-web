@@ -23,6 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private readonly LOGIN_EXCEPTION_CODE = 'user-not-logged-in';
   private readonly SIGNATURE_EXCEPTION_MESSAGE = 'Signature has expired';
   private readonly REFRESH_TOKEN_EXPIRED = 'Refresh token is expired';
+  private readonly REFRESH_TOKEN_INVALID = 'Invalid refresh token';
   private readonly TOKEN_TYPE = 'JWT';
   private readonly X_CUSTOM_HEADER = 'X-Custom-Header';
   private readonly X_CUSTOM_HEADER_VALUE = 'custom-value';
@@ -33,6 +34,12 @@ export class AuthInterceptor implements HttpInterceptor {
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
   );
+
+  logoutExcetionMessages = [
+    this.LOGIN_EXCEPTION_CODE,
+    this.REFRESH_TOKEN_INVALID,
+    this.REFRESH_TOKEN_EXPIRED,
+  ];
 
   constructor(
     private refreshTokenGQL: RefreshTokenGQL,
@@ -56,10 +63,8 @@ export class AuthInterceptor implements HttpInterceptor {
         ) {
           const errors = event.body.errors as any[];
           const needsToLogin = Boolean(
-            errors.find(
-              (error: any) =>
-                error.message === this.LOGIN_EXCEPTION_CODE ||
-                error.message === this.REFRESH_TOKEN_EXPIRED
+            errors.find((error: any) =>
+              this.logoutExcetionMessages.includes(error.message)
             )
           );
 

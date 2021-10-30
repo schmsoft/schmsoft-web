@@ -1,0 +1,97 @@
+<h1 class="page-header">Register Client</h1>
+
+<form clrStepper [formGroup]="clientFormGroup" (ngSubmit)="submit()">
+  <clr-stepper-panel formGroupName="owner">
+    <clr-step-title>Client Details</clr-step-title>
+    <clr-step-description>Information about the client</clr-step-description>
+    <clr-step-content *clrIfExpanded>
+      <clr-input-container>
+        <label>First Name</label>
+        <input clrInput formControlName="firstName" />
+        <clr-control-error *clrIfError="'required'"
+          >First Name Required</clr-control-error
+        >
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Last Name</label>
+        <input clrInput formControlName="lastName" />
+        <clr-control-error *clrIfError="'required'"
+          >Last Name Required</clr-control-error
+        >
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Phone Number</label>
+        <input clrInput formControlName="phoneNumber" />
+        <clr-control-error *clrIfError="'required'"
+          >Phone Number Required</clr-control-error
+        >
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>ID Number</label>
+        <input clrInput formControlName="identificationNumber" />
+        <clr-control-error *clrIfError="'required'"
+          >ID Number Required</clr-control-error
+        >
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Total Monthly Income (KES)</label>
+        <input clrInput formControlName="totalMonthlyIncome" />
+        <clr-control-error *clrIfError="'required'"
+          >Total Monthly Income Required</clr-control-error
+        >
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Number of Dependants</label>
+        <input clrInput formControlName="numberOfDependants" />
+        <clr-control-error *clrIfError="'required'"
+          >Number of Dependants Required</clr-control-error
+        >
+      </clr-input-container>
+
+      <clr-select-container>
+        <label>Gender</label>
+        <select clrSelect name="gender" formControlName="gender">
+          <option *ngFor="let option of genderKeys" [value]="option">
+            {{ genderOptions[option] }}
+          </option>
+        </select>
+        <clr-control-error>Gender is Required</clr-control-error>
+      </clr-select-container>
+
+      <clr-select-container>
+        <label>Marital Status</label>
+        <select clrSelect name="maritalStatus" formControlName="maritalStatus">
+          <option *ngFor="let option of maritalStatusKeys" [value]="option">
+            {{ maritalStatusOptions[option] }}
+          </option>
+        </select>
+        <clr-control-error>Marital Status is Required</clr-control-error>
+      </clr-select-container>
+
+      <button clrStepButton="next">next</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+
+  <clr-stepper-panel formGroupName="business">
+    <clr-step-title>Business Details</clr-step-title>
+    <clr-step-description>Information about the business</clr-step-description>
+    <clr-step-content *clrIfExpanded>
+      ...
+      <button clrStepButton="next">next</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+
+  <!-- <clr-stepper-panel formGroupName="password">
+    <clr-step-title>Password</clr-step-title>
+    <clr-step-description>...</clr-step-description>
+    <clr-step-content *clrIfExpanded>
+      ...
+      <button clrStepButton="submit">submit</button>
+    </clr-step-content>
+  </clr-stepper-panel> -->
+</form>

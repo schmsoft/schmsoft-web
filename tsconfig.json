@@ -22,7 +22,8 @@
       "@schmsoft/*": ["src/app/*"],
       "@env/*": ["src/environments/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

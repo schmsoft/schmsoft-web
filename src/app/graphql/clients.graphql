@@ -1,0 +1,21 @@
+query Clients {
+  businessOwners {
+    id
+    created
+    modified
+    isRemoved
+    roleDefinition
+    business {
+      name
+    }
+    identificationMethod
+    identificationNumber
+    phoneNumber
+    totalMonthlyIncomeCurrency
+    totalMonthlyIncome
+    numberOfDependants
+    gender
+    maritalStatus
+    passportPhoto
+  }
+}
