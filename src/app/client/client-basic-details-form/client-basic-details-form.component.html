@@ -1,0 +1,55 @@
+<form clrForm [formGroup]="formGroup" autocomplete="off" clrLayout="vertical">
+  <clr-input-container>
+    <label for="firstName">First Names</label>
+    <input
+      clrInput
+      formControlName="firstNames"
+      placeholder="First Names"
+      id="firstName"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >First Name Required</clr-control-error
+    >
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="lastName">Last Name</label>
+    <input
+      clrInput
+      formControlName="lastName"
+      placeholder="Last Name"
+      id="lastName"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Last Name Required</clr-control-error
+    >
+  </clr-input-container>
+
+  <clr-select-container>
+    <label for="gender">Gender</label>
+    <select clrSelect name="gender" formControlName="gender" id="gender">
+      <option *ngFor="let option of genderOptions" [value]="option.optionValue">
+        {{ option.optionDescription | titlecase }}
+      </option>
+    </select>
+    <clr-control-error>Gender is Required</clr-control-error>
+  </clr-select-container>
+
+  <clr-select-container>
+    <label for="maritalStatus">Marital Status</label>
+    <select
+      clrSelect
+      name="maritalStatus"
+      formControlName="maritalStatus"
+      id="maritalStatus"
+    >
+      <option
+        *ngFor="let option of maritalStatusOptions"
+        [value]="option.optionValue"
+      >
+        {{ option.optionDescription | titlecase }}
+      </option>
+    </select>
+    <clr-control-error>Marital Status is Required</clr-control-error>
+  </clr-select-container>
+</form>

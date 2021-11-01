@@ -1,97 +1,71 @@
-<h1 class="page-header">Register Client</h1>
+<clr-wizard
+  #createClientWizard
+  [clrWizardOpen]="showClientForm"
+  [clrWizardSize]="'lg'"
+  (clrWizardOpenChange)="close()"
+>
+  <clr-wizard-title>New Client</clr-wizard-title>
 
-<form clrStepper [formGroup]="clientFormGroup" (ngSubmit)="submit()">
-  <clr-stepper-panel formGroupName="owner">
-    <clr-step-title>Client Details</clr-step-title>
-    <clr-step-description>Information about the client</clr-step-description>
-    <clr-step-content *clrIfExpanded>
-      <clr-input-container>
-        <label>First Name</label>
-        <input clrInput formControlName="firstName" />
-        <clr-control-error *clrIfError="'required'"
-          >First Name Required</clr-control-error
-        >
-      </clr-input-container>
+  <clr-wizard-button [type]="'cancel'" (clrWizardButtonClicked)="close()"
+    >Cancel</clr-wizard-button
+  >
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button
+    [type]="'custom-finish'"
+    (clrWizardButtonClicked)="submit()"
+    >Complete</clr-wizard-button
+  >
 
-      <clr-input-container>
-        <label>Last Name</label>
-        <input clrInput formControlName="lastName" />
-        <clr-control-error *clrIfError="'required'"
-          >Last Name Required</clr-control-error
-        >
-      </clr-input-container>
+  <clr-wizard-page
+    #pageOne
+    [clrWizardPageNextDisabled]="basicDetailsForm.invalid"
+  >
+    <ng-template clrPageTitle>Basic Information</ng-template>
+    <ng-template clrPageNavTitle>Basic Information</ng-template>
 
-      <clr-input-container>
-        <label>Phone Number</label>
-        <input clrInput formControlName="phoneNumber" />
-        <clr-control-error *clrIfError="'required'"
-          >Phone Number Required</clr-control-error
-        >
-      </clr-input-container>
+    <ssw-client-basic-details-form
+      [formGroup]="basicDetailsForm"
+    ></ssw-client-basic-details-form>
+  </clr-wizard-page>
 
-      <clr-input-container>
-        <label>ID Number</label>
-        <input clrInput formControlName="identificationNumber" />
-        <clr-control-error *clrIfError="'required'"
-          >ID Number Required</clr-control-error
-        >
-      </clr-input-container>
+  <clr-wizard-page
+    #pageTwo
+    [clrWizardPageNextDisabled]="identificationDetailsForm.invalid"
+  >
+    <ng-template clrPageTitle>Identification Details</ng-template>
+    <ng-template clrPageNavTitle>Identification Details</ng-template>
 
-      <clr-input-container>
-        <label>Total Monthly Income (KES)</label>
-        <input clrInput formControlName="totalMonthlyIncome" />
-        <clr-control-error *clrIfError="'required'"
-          >Total Monthly Income Required</clr-control-error
-        >
-      </clr-input-container>
+    <ssw-client-identification-details-form
+      [formGroup]="identificationDetailsForm"
+    ></ssw-client-identification-details-form>
+  </clr-wizard-page>
 
-      <clr-input-container>
-        <label>Number of Dependants</label>
-        <input clrInput formControlName="numberOfDependants" />
-        <clr-control-error *clrIfError="'required'"
-          >Number of Dependants Required</clr-control-error
-        >
-      </clr-input-container>
+  <clr-wizard-page
+    #pageThree
+    [clrWizardPageNextDisabled]="contactDetailsForm.invalid"
+  >
+    <ng-template clrPageTitle>Contact Details</ng-template>
+    <ng-template clrPageNavTitle>Contact Details</ng-template>
 
-      <clr-select-container>
-        <label>Gender</label>
-        <select clrSelect name="gender" formControlName="gender">
-          <option *ngFor="let option of genderKeys" [value]="option">
-            {{ genderOptions[option] }}
-          </option>
-        </select>
-        <clr-control-error>Gender is Required</clr-control-error>
-      </clr-select-container>
+    <ssw-client-contact-details-form
+      [formGroup]="contactDetailsForm"
+    ></ssw-client-contact-details-form>
+  </clr-wizard-page>
 
-      <clr-select-container>
-        <label>Marital Status</label>
-        <select clrSelect name="maritalStatus" formControlName="maritalStatus">
-          <option *ngFor="let option of maritalStatusKeys" [value]="option">
-            {{ maritalStatusOptions[option] }}
-          </option>
-        </select>
-        <clr-control-error>Marital Status is Required</clr-control-error>
-      </clr-select-container>
+  <clr-wizard-page
+    #pageFour
+    [clrWizardPageNextDisabled]="businessBasicDetailsForm.invalid"
+  >
+    <ng-template clrPageTitle>Business Details</ng-template>
+    <ng-template clrPageNavTitle>Business Details</ng-template>
 
-      <button clrStepButton="next">next</button>
-    </clr-step-content>
-  </clr-stepper-panel>
+    <ssw-business-basic-details-form
+      [formGroup]="businessBasicDetailsForm"
+    ></ssw-business-basic-details-form>
+  </clr-wizard-page>
 
-  <clr-stepper-panel formGroupName="business">
-    <clr-step-title>Business Details</clr-step-title>
-    <clr-step-description>Information about the business</clr-step-description>
-    <clr-step-content *clrIfExpanded>
-      ...
-      <button clrStepButton="next">next</button>
-    </clr-step-content>
-  </clr-stepper-panel>
-
-  <!-- <clr-stepper-panel formGroupName="password">
-    <clr-step-title>Password</clr-step-title>
-    <clr-step-description>...</clr-step-description>
-    <clr-step-content *clrIfExpanded>
-      ...
-      <button clrStepButton="submit">submit</button>
-    </clr-step-content>
-  </clr-stepper-panel> -->
-</form>
+  <clr-wizard-page #pageFive>
+    <ng-template clrPageTitle>Summary</ng-template>
+  </clr-wizard-page>
+</clr-wizard>

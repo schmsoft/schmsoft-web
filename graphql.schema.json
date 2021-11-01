@@ -166,6 +166,305 @@
       },
       {
         "kind": "ENUM",
+        "name": "BusinessCategory",
+        "description": "An enumeration.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ACCOUNTING",
+            "description": "Accounting, bookkeeping and tax preparation",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AGENTS",
+            "description": "A professional representative in a business transaction such as real estate",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AGRICULTURE",
+            "description": "Farming, fishing, and related business",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ANTIQUES_AND_COLLECTABLES",
+            "description": "Sales and appraisals of antiques and collectables",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ARTS_AND_CRAFTS",
+            "description": "Artists, artisans and related businesses such as art and galleries",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ASSETS_MANAGEMENT",
+            "description": "Managing investment and assets such as property",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AUTOMOTIVE",
+            "description": "Automotive repair, customization and services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BEVERAGES",
+            "description": "Beverages manufacturing, wineries and distilleries",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BROKERS",
+            "description": "Buying or selling services such as insurance for clients",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BUSINESS_SERVICES",
+            "description": "Business services such as outsourcing of processes and administrative procedures. For examples, asset appraisal services for financial institutions",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CHILD_CARE",
+            "description": "Licensed child care centers, home child care and preschools",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CLEANIG_SERVICES",
+            "description": "Indoor and outdoor cleaning services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DESIGN",
+            "description": "Design is a broad field that includes the design of digital works such websites and physical things such as interior design",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DISTRIBUTOR",
+            "description": "A business model that involves buying in bulk and sellling in smaller units. Often involves importing & exporting",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ECOMMERCE",
+            "description": "Selling goods and services using digital channels such as web",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "EDUCATION_AND_TRAINING",
+            "description": "Schools and training services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ENTERTAINMENT",
+            "description": "Production and ditribution of entertainmnet such as films",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FASHION",
+            "description": "Apparel, footwear and accessories and related businesses such as fashion designers and modeling agencies",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FOOD_SEVICES",
+            "description": "Restuarants, cafes and catering",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GARDENING_AND_LANDSCAPING",
+            "description": "Gardening and landscaping services such as tree pruning",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HEALTH_AND_BEAUTY",
+            "description": "Health and beauty services such as hair salons nails slon and spas",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INFORMATION_TECHNOLOGY",
+            "description": "A broad categories of business that includes software development, system integration, IT consulting, informaton secutrity and IT services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "LEGAL_SERVICES",
+            "description": "Lawyers and legal services such as arbitration",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MAINTENANCE_AND_REPAIR",
+            "description": "Maintenance and repair services for technology, machines, buildings, property and assets",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MANAGEMENT_SERVICES",
+            "description": "Managing processes for individuals and businesses such as Managing rentals for property owner",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MANUFACTURING",
+            "description": "Small scale manufacturing such as local souvenirs or a niche product",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MARKETING_SERVICES",
+            "description": "Advertising, promotion, sales and other marketing services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MEDIA",
+            "description": "Production and distribution of media such as graphics and video",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MEDICAL_PRACTITIONERS",
+            "description": "Doctors, dentists and other medical practitioners",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MUSIC",
+            "description": "Production, promotion and distribution of music",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NIGHTLIFE",
+            "description": "Bars, nightclubs and other forms of nightlife such as karaoke",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PERSONAL_SERVICES",
+            "description": "Personal consulting services such as personal trainer",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PET_SERVICES",
+            "description": "Pet supplies and services such as grooming and training",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PHOTOGRAPHY",
+            "description": "Photographers and Photography services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PROFESSIONAL_SERVICES",
+            "description": "Consulting and freelancing",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PUBLISHING",
+            "description": "Publishing literature or informaton in physical or digital formats",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RECRUITING_AND_STAFFING",
+            "description": "Recruiters and staffing services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RENTAL_AND_LEASING",
+            "description": "Reniting and leasing of property, vehicles, machines, electonics and other assets",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RESEARCH_SERVICES",
+            "description": "Research services such as market research",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETAIL",
+            "description": "Selling products from physical location",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SHIPPING_AND_DELIVERY",
+            "description": "Shipping and delivery services such local delivery of takeout or flowers",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SPORTS_AND_RECREATION",
+            "description": "Businesses that compete with far large competitor by applealing to customers who prioritize sustainable practices",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TOYS_AND_HOBBIES",
+            "description": "Production and distribution of toys and obby Products",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TRANSPORTATION",
+            "description": "Transportation related businesses such as bicycle rentals or taxis",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TRAVEL_AND_TOURISM",
+            "description": "Hotels, resorts, tours, travel agencies souvenirs vendors and other businesses related to tourism",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VALUE_ADDED_RESELLER",
+            "description": "A business model that involves reselling an existing product or services wrapped in a value added service. For example, selling software and adding implementation and support services",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WAREHOUSING_AND_STORAGE",
+            "description": "Warehousing, moving and storage related businesses",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WHOLESALE",
+            "description": "Buying and selling in bulk. Typically related to importing and exporting of goods",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "BusinessDailySalesCurrency",
         "description": "An enumeration.",
         "fields": null,
@@ -4050,6 +4349,18 @@
             "deprecationReason": null
           },
           {
+            "name": "category",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "BusinessCategory",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created",
             "description": null,
             "args": [],
@@ -4939,6 +5250,35 @@
       },
       {
         "kind": "ENUM",
+        "name": "OwnerGender",
+        "description": "An enumeration.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "FEMALE",
+            "description": "Female",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MALE",
+            "description": "Male",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OTHER",
+            "description": "Other",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "OwnerIdentificationMethod",
         "description": "An enumeration.",
         "fields": null,
@@ -4946,19 +5286,19 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "DRIVER_S_LICENSE",
-            "description": "Driver License",
+            "name": "DRIVER_LICENSE",
+            "description": "Driver's License",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "NATIONAL_ID",
-            "description": "National Id",
+            "description": "National ID",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "PASSOPORT",
+            "name": "PASSPORT",
             "description": "Passport",
             "isDeprecated": false,
             "deprecationReason": null
@@ -5111,6 +5451,41 @@
         ],
         "interfaces": null,
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "OwnerMaritalStatus",
+        "description": "An enumeration.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "DIVORCED",
+            "description": "Divorced",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MARRIED",
+            "description": "Married",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SINGLE",
+            "description": "Single",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WIDOWED",
+            "description": "Widowed",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -7002,8 +7377,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "OwnerGender",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7078,8 +7453,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "OwnerMaritalStatus",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7171,7 +7546,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Decimal",
               "ofType": null
             },
             "isDeprecated": false,

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import {
+  BusinessInput,
+  MutationAddBusinessArgs,
   OwnerGender,
-  OwnerIdentificationMethod,
   OwnerMaritalStatus,
-  OwnerTotalMonthlyIncomeCurrency,
+  RegisterClientGQL,
 } from '@graphql/generated/models';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-create-client',
@@ -13,49 +16,97 @@ import {
   styleUrls: ['./create-client.component.scss'],
 })
 export class CreateClientComponent implements OnInit {
-  clientFormGroup!: FormGroup;
+  @Input() showClientForm!: boolean;
+  @Output() showClientFormChanged = new EventEmitter<boolean>();
+
+  basicDetailsForm!: FormGroup;
+  identificationDetailsForm!: FormGroup;
+  contactDetailsForm!: FormGroup;
+  businessBasicDetailsForm!: FormGroup;
 
   genderKeys = [];
   genderOptions = OwnerGender;
 
   maritalStatusKeys = [];
   maritalStatusOptions = OwnerMaritalStatus;
+  disableNext = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private registerClientGQL: RegisterClientGQL
+  ) {}
 
   ngOnInit(): void {
-    this.genderKeys = Object.keys(this.genderOptions) as any;
-    this.maritalStatusKeys = Object.keys(this.maritalStatusOptions) as any;
-
     this.initClientFormGroup();
   }
 
-  submit() {}
+  submit() {
+    this.disableNext = true;
+
+    const business = this.businessBasicDetailsForm.value;
+
+    console.log({ business });
+
+    this.registerClientGQL
+      .mutate({
+        business,
+        owner: {
+          gender: this.basicDetailsForm.value.gender,
+          phoneNumber: this.contactDetailsForm.value.phoneNumber,
+          identificationMethod:
+            this.identificationDetailsForm.value.identificationMethod,
+          identificationNumber:
+            this.identificationDetailsForm.value.identificationNumber,
+        },
+      })
+      .pipe(take(1))
+      .subscribe();
+  }
+
+  close() {
+    this.showClientForm = false;
+    this.showClientFormChanged.emit(this.showClientForm);
+  }
+
+  reset() {}
 
   private initClientFormGroup() {
-    this.clientFormGroup = this.fb.group({
-      owner: this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        phoneNumber: ['', Validators.required],
-        identificationMethod: [
-          OwnerIdentificationMethod.NationalId,
+    this.basicDetailsForm = this.fb.group({
+      firstNames: ['', Validators.required],
+      lastName: ['', Validators.required],
+      gender: ['', Validators.required],
+      maritalStatus: ['', Validators.required],
+    });
+
+    this.identificationDetailsForm = this.fb.group({
+      identificationMethod: ['', Validators.required],
+      identificationNumber: ['', Validators.required],
+      frontScan: ['', Validators.required],
+      backScan: ['', Validators.required],
+    });
+
+    this.contactDetailsForm = this.fb.group({
+      phoneNumber: [
+        '',
+        [
           Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
         ],
-        identificationNumber: ['', Validators.required],
-        totalMonthlyIncome: [0, Validators.required],
-        totalMonthlyIncomeCurrency: [
-          OwnerTotalMonthlyIncomeCurrency.Kes,
-          Validators.required,
-        ],
-        numberOfDependants: [0, Validators.required],
-        gender: ['', Validators.required],
-        maritalStatus: ['', Validators.required],
-        passportPhoto: [''],
-      }),
-      business: this.fb.group({
-        name: ['', Validators.required],
-      }),
+      ],
+      alternativePhoneNumber: [
+        '',
+        [Validators.minLength(10), Validators.maxLength(10)],
+      ],
+      email: ['', Validators.email],
+    });
+
+    this.businessBasicDetailsForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      businessType: ['', Validators.required],
+      category: [''],
+      yearsInCurrentLocation: [1],
     });
   }
 }

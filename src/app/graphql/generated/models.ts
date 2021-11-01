@@ -71,6 +71,106 @@ export enum BusinessBusinessType {
 }
 
 /** An enumeration. */
+export enum BusinessCategory {
+  /** Accounting, bookkeeping and tax preparation */
+  Accounting = 'ACCOUNTING',
+  /** A professional representative in a business transaction such as real estate */
+  Agents = 'AGENTS',
+  /** Farming, fishing, and related business */
+  Agriculture = 'AGRICULTURE',
+  /** Sales and appraisals of antiques and collectables */
+  AntiquesAndCollectables = 'ANTIQUES_AND_COLLECTABLES',
+  /** Artists, artisans and related businesses such as art and galleries */
+  ArtsAndCrafts = 'ARTS_AND_CRAFTS',
+  /** Managing investment and assets such as property */
+  AssetsManagement = 'ASSETS_MANAGEMENT',
+  /** Automotive repair, customization and services */
+  Automotive = 'AUTOMOTIVE',
+  /** Beverages manufacturing, wineries and distilleries */
+  Beverages = 'BEVERAGES',
+  /** Buying or selling services such as insurance for clients */
+  Brokers = 'BROKERS',
+  /** Business services such as outsourcing of processes and administrative procedures. For examples, asset appraisal services for financial institutions */
+  BusinessServices = 'BUSINESS_SERVICES',
+  /** Licensed child care centers, home child care and preschools */
+  ChildCare = 'CHILD_CARE',
+  /** Indoor and outdoor cleaning services */
+  CleanigServices = 'CLEANIG_SERVICES',
+  /** Design is a broad field that includes the design of digital works such websites and physical things such as interior design */
+  Design = 'DESIGN',
+  /** A business model that involves buying in bulk and sellling in smaller units. Often involves importing & exporting */
+  Distributor = 'DISTRIBUTOR',
+  /** Selling goods and services using digital channels such as web */
+  Ecommerce = 'ECOMMERCE',
+  /** Schools and training services */
+  EducationAndTraining = 'EDUCATION_AND_TRAINING',
+  /** Production and ditribution of entertainmnet such as films */
+  Entertainment = 'ENTERTAINMENT',
+  /** Apparel, footwear and accessories and related businesses such as fashion designers and modeling agencies */
+  Fashion = 'FASHION',
+  /** Restuarants, cafes and catering */
+  FoodSevices = 'FOOD_SEVICES',
+  /** Gardening and landscaping services such as tree pruning */
+  GardeningAndLandscaping = 'GARDENING_AND_LANDSCAPING',
+  /** Health and beauty services such as hair salons nails slon and spas */
+  HealthAndBeauty = 'HEALTH_AND_BEAUTY',
+  /** A broad categories of business that includes software development, system integration, IT consulting, informaton secutrity and IT services */
+  InformationTechnology = 'INFORMATION_TECHNOLOGY',
+  /** Lawyers and legal services such as arbitration */
+  LegalServices = 'LEGAL_SERVICES',
+  /** Maintenance and repair services for technology, machines, buildings, property and assets */
+  MaintenanceAndRepair = 'MAINTENANCE_AND_REPAIR',
+  /** Managing processes for individuals and businesses such as Managing rentals for property owner */
+  ManagementServices = 'MANAGEMENT_SERVICES',
+  /** Small scale manufacturing such as local souvenirs or a niche product */
+  Manufacturing = 'MANUFACTURING',
+  /** Advertising, promotion, sales and other marketing services */
+  MarketingServices = 'MARKETING_SERVICES',
+  /** Production and distribution of media such as graphics and video */
+  Media = 'MEDIA',
+  /** Doctors, dentists and other medical practitioners */
+  MedicalPractitioners = 'MEDICAL_PRACTITIONERS',
+  /** Production, promotion and distribution of music */
+  Music = 'MUSIC',
+  /** Bars, nightclubs and other forms of nightlife such as karaoke */
+  Nightlife = 'NIGHTLIFE',
+  /** Personal consulting services such as personal trainer */
+  PersonalServices = 'PERSONAL_SERVICES',
+  /** Pet supplies and services such as grooming and training */
+  PetServices = 'PET_SERVICES',
+  /** Photographers and Photography services */
+  Photography = 'PHOTOGRAPHY',
+  /** Consulting and freelancing */
+  ProfessionalServices = 'PROFESSIONAL_SERVICES',
+  /** Publishing literature or informaton in physical or digital formats */
+  Publishing = 'PUBLISHING',
+  /** Recruiters and staffing services */
+  RecruitingAndStaffing = 'RECRUITING_AND_STAFFING',
+  /** Reniting and leasing of property, vehicles, machines, electonics and other assets */
+  RentalAndLeasing = 'RENTAL_AND_LEASING',
+  /** Research services such as market research */
+  ResearchServices = 'RESEARCH_SERVICES',
+  /** Selling products from physical location */
+  Retail = 'RETAIL',
+  /** Shipping and delivery services such local delivery of takeout or flowers */
+  ShippingAndDelivery = 'SHIPPING_AND_DELIVERY',
+  /** Businesses that compete with far large competitor by applealing to customers who prioritize sustainable practices */
+  SportsAndRecreation = 'SPORTS_AND_RECREATION',
+  /** Production and distribution of toys and obby Products */
+  ToysAndHobbies = 'TOYS_AND_HOBBIES',
+  /** Transportation related businesses such as bicycle rentals or taxis */
+  Transportation = 'TRANSPORTATION',
+  /** Hotels, resorts, tours, travel agencies souvenirs vendors and other businesses related to tourism */
+  TravelAndTourism = 'TRAVEL_AND_TOURISM',
+  /** A business model that involves reselling an existing product or services wrapped in a value added service. For example, selling software and adding implementation and support services */
+  ValueAddedReseller = 'VALUE_ADDED_RESELLER',
+  /** Warehousing, moving and storage related businesses */
+  WarehousingAndStorage = 'WAREHOUSING_AND_STORAGE',
+  /** Buying and selling in bulk. Typically related to importing and exporting of goods */
+  Wholesale = 'WHOLESALE',
+}
+
+/** An enumeration. */
 export enum BusinessDailySalesCurrency {
   /** Andorran Peseta */
   Adp = 'ADP',
@@ -1327,6 +1427,7 @@ export enum BusinessStatus {
 export type BusinessType = {
   __typename?: 'BusinessType';
   businessType?: Maybe<BusinessBusinessType>;
+  category?: Maybe<BusinessCategory>;
   created: Scalars['DateTime'];
   dailySales?: Maybe<Scalars['Decimal']>;
   dailySalesCurrency: BusinessDailySalesCurrency;
@@ -1433,13 +1534,23 @@ export type ObtainJsonWebToken = {
 };
 
 /** An enumeration. */
+export enum OwnerGender {
+  /** Female */
+  Female = 'FEMALE',
+  /** Male */
+  Male = 'MALE',
+  /** Other */
+  Other = 'OTHER',
+}
+
+/** An enumeration. */
 export enum OwnerIdentificationMethod {
-  /** Driver License */
-  DriverSLicense = 'DRIVER_S_LICENSE',
-  /** National Id */
+  /** Driver's License */
+  DriverLicense = 'DRIVER_LICENSE',
+  /** National ID */
   NationalId = 'NATIONAL_ID',
   /** Passport */
-  Passoport = 'PASSOPORT',
+  Passport = 'PASSPORT',
 }
 
 export type OwnerInput = {
@@ -1454,6 +1565,18 @@ export type OwnerInput = {
   roleDefinition?: Maybe<Scalars['String']>;
   totalMonthlyIncome?: Maybe<Scalars['Decimal']>;
 };
+
+/** An enumeration. */
+export enum OwnerMaritalStatus {
+  /** Divorced */
+  Divorced = 'DIVORCED',
+  /** Married */
+  Married = 'MARRIED',
+  /** Single */
+  Single = 'SINGLE',
+  /** Widowed */
+  Widowed = 'WIDOWED',
+}
 
 /** An enumeration. */
 export enum OwnerTotalMonthlyIncomeCurrency {
@@ -2075,18 +2198,18 @@ export type OwnerType = {
   __typename?: 'OwnerType';
   business: BusinessType;
   created: Scalars['DateTime'];
-  gender?: Maybe<Scalars['String']>;
+  gender?: Maybe<OwnerGender>;
   id: Scalars['ID'];
   identificationMethod: OwnerIdentificationMethod;
   identificationNumber: Scalars['String'];
   isRemoved: Scalars['Boolean'];
-  maritalStatus?: Maybe<Scalars['String']>;
+  maritalStatus?: Maybe<OwnerMaritalStatus>;
   modified: Scalars['DateTime'];
   numberOfDependants: Scalars['Int'];
   passportPhoto: Scalars['String'];
   phoneNumber: Scalars['String'];
   roleDefinition: Scalars['String'];
-  totalMonthlyIncome?: Maybe<Scalars['String']>;
+  totalMonthlyIncome?: Maybe<Scalars['Decimal']>;
   totalMonthlyIncomeCurrency: OwnerTotalMonthlyIncomeCurrency;
   user: UserType;
 };
@@ -2170,15 +2293,28 @@ export type ClientsQuery = {
         identificationNumber: string;
         phoneNumber: string;
         totalMonthlyIncomeCurrency: OwnerTotalMonthlyIncomeCurrency;
-        totalMonthlyIncome?: Maybe<string>;
+        totalMonthlyIncome?: Maybe<any>;
         numberOfDependants: number;
-        gender?: Maybe<string>;
-        maritalStatus?: Maybe<string>;
+        gender?: Maybe<OwnerGender>;
+        maritalStatus?: Maybe<OwnerMaritalStatus>;
         passportPhoto: string;
         business: { __typename?: 'BusinessType'; name: string };
       }>
     >
   >;
+};
+
+export type RegisterClientMutationVariables = Exact<{
+  business: BusinessInput;
+  owner: OwnerInput;
+}>;
+
+export type RegisterClientMutation = {
+  __typename?: 'Mutation';
+  addBusiness?: Maybe<{
+    __typename?: 'AddBusinessMutation';
+    business?: Maybe<{ __typename?: 'BusinessType'; id: string }>;
+  }>;
 };
 
 export type LoanPortoliosQueryVariables = Exact<{ [key: string]: never }>;
@@ -2299,6 +2435,29 @@ export class ClientsGQL extends Apollo.Query<
   ClientsQueryVariables
 > {
   document = ClientsDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const RegisterClientDocument = gql`
+  mutation RegisterClient($business: BusinessInput!, $owner: OwnerInput!) {
+    addBusiness(business: $business, owner: $owner) {
+      business {
+        id
+      }
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class RegisterClientGQL extends Apollo.Mutation<
+  RegisterClientMutation,
+  RegisterClientMutationVariables
+> {
+  document = RegisterClientDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { ClientsGQL } from '@graphql/generated/models';
 
@@ -12,6 +12,8 @@ import { ClientsGQL } from '@graphql/generated/models';
 })
 export class ListClientsComponent implements OnInit {
   clients$!: Observable<any[]>;
+
+  showClientForm = false;
 
   constructor(private clientsGQL: ClientsGQL) {}
 

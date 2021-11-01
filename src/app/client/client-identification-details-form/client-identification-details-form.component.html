@@ -1,0 +1,71 @@
+<form clrForm [formGroup]="formGroup" clrLayout="vertical" autocomplete="off">
+  <clr-select-container>
+    <label for="identificationMethod">Identification Method</label>
+    <select
+      clrSelect
+      name="identificationMethod"
+      formControlName="identificationMethod"
+      id="identificationMethod"
+    >
+      <option
+        *ngFor="let option of identificationMethods"
+        [value]="option.optionValue"
+      >
+        {{ option.optionDescription | titlecase }}
+      </option>
+    </select>
+    <clr-control-error>Identification Method is Required</clr-control-error>
+  </clr-select-container>
+
+  <clr-input-container>
+    <label for="identificationNumber">Identification Number</label>
+    <input
+      clrInput
+      formControlName="identificationNumber"
+      placeholder="Identification Number"
+      id="identificationNumber"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Identification Number Required</clr-control-error
+    >
+  </clr-input-container>
+
+  <!-- TODO move this to a reusable component -->
+  <div class="clr-form-control app-uploader-file">
+    <label for="idFrontScan" class="clr-control-label">ID Front Scan</label>
+    <div class="clr-control-container">
+      <div class="clr-file-wrapper">
+        <input
+          type="file"
+          id="idFrontScan"
+          placeholder="Enter value here"
+          accept="image/*, .pdf"
+          (change)="frontFileSelected($event)"
+          required
+        />
+      </div>
+      <!-- IMPORTANT DIFFERENCE IN STRUCTURE! ICON IS NOT PART OF THE INPUT WRAPPER -->
+      <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+      <span class="clr-subtext">Image or PDF</span>
+    </div>
+  </div>
+
+  <div class="clr-form-control app-uploader-file">
+    <label for="idBackScan" class="clr-control-label">ID Back Scan</label>
+    <div class="clr-control-container">
+      <div class="clr-file-wrapper">
+        <input
+          type="file"
+          id="idBackScan"
+          placeholder="Enter value here"
+          accept="image/*, .pdf"
+          (change)="backFileSelected($event)"
+          required
+        />
+      </div>
+      <!-- IMPORTANT DIFFERENCE IN STRUCTURE! ICON IS NOT PART OF THE INPUT WRAPPER -->
+      <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+      <span class="clr-subtext">Image or PDF</span>
+    </div>
+  </div>
+</form>

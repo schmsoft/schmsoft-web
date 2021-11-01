@@ -1,0 +1,62 @@
+<form clrForm [formGroup]="formGroup" clrLayout="vertical" autocomplete="off">
+  <clr-input-container>
+    <label for="businessName">Business Name</label>
+    <input
+      clrInput
+      type="text"
+      formControlName="name"
+      placeholder="Business Name"
+      id="businessName"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Business Name</clr-control-error
+    >
+  </clr-input-container>
+
+  <clr-textarea-container>
+    <label>Description</label>
+    <textarea
+      clrTextarea
+      name="description"
+      rows="4"
+      formControlName="description"
+      placeholder="What is the business about?"
+    ></textarea>
+  </clr-textarea-container>
+
+  <clr-select-container>
+    <label for="businessType">Business Type</label>
+    <select
+      clrSelect
+      name="businessType"
+      formControlName="businessType"
+      id="businessType"
+    >
+      <option
+        *ngFor="let option of businessTypeOptions"
+        [value]="option.optionValue"
+      >
+        {{ option.optionDescription | titlecase }}
+      </option>
+    </select>
+    <clr-control-error>Business Type is Required</clr-control-error>
+  </clr-select-container>
+
+  <clr-select-container>
+    <label for="businessCategory">Category</label>
+    <select
+      clrSelect
+      name="businessCategory"
+      formControlName="category"
+      id="businessCategory"
+    >
+      <option
+        *ngFor="let option of businessCategoryOptions"
+        [value]="option.optionValue"
+      >
+        {{ option.optionDescription | titlecase }}
+      </option>
+    </select>
+    <clr-control-error>Business Category is Required</clr-control-error>
+  </clr-select-container>
+</form>

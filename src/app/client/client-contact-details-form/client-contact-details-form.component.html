@@ -1,0 +1,45 @@
+<form clrForm [formGroup]="formGroup" clrLayout="vertical" autocomplete="off">
+  <clr-input-container>
+    <label for="phoneNumber">Phone Number</label>
+    <input
+      clrInput
+      type="tel"
+      maxlength="10"
+      formControlName="phoneNumber"
+      placeholder="Phone Number"
+      id="phoneNumber"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Phone Number Required</clr-control-error
+    >
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="alternativePhoneNumber">Alt. Phone Number</label>
+    <input
+      clrInput
+      type="tel"
+      maxlength="10"
+      formControlName="alternativePhoneNumber"
+      placeholder="Alternative Phone Number"
+      id="alternativePhoneNumber"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Alt. Phone Number Required</clr-control-error
+    >
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="emailAddress">Email Address</label>
+    <input
+      clrInput
+      type="email"
+      formControlName="email"
+      placeholder="Email Address"
+      id="emailAddress"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Alt. Phone Number Required</clr-control-error
+    >
+  </clr-input-container>
+</form>

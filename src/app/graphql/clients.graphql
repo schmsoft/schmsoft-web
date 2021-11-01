@@ -19,3 +19,11 @@ query Clients {
     passportPhoto
   }
 }
+
+mutation RegisterClient($business: BusinessInput!, $owner: OwnerInput!) {
+  addBusiness(business: $business, owner: $owner) {
+    business {
+      id
+    }
+  }
+}
