@@ -1,4 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  ClrFormsModule,
+  ClrInputModule,
+  ClrSelectModule,
+  ClrTextareaModule,
+} from '@clr/angular';
 
 import { BusinessBasicDetailsFormComponent } from './business-basic-details-form.component';
 
@@ -9,6 +16,7 @@ describe('BusinessBasicDetailsFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BusinessBasicDetailsFormComponent],
+      imports: [ClrInputModule, ClrSelectModule, ClrTextareaModule],
     }).compileComponents();
   });
 

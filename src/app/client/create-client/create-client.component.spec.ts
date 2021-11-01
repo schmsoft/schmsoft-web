@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ClrWizardModule } from '@clr/angular';
 
 import { CreateClientComponent } from './create-client.component';
 
@@ -9,6 +11,7 @@ describe('CreateClientComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CreateClientComponent],
+      imports: [ReactiveFormsModule, ClrWizardModule],
     }).compileComponents();
   });
 

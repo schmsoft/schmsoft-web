@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClrLayoutModule, ClrVerticalNavModule } from '@clr/angular';
+import { RouterModule } from '@angular/router';
+import {
+  ClrLayoutModule,
+  ClrNavigationModule,
+  ClrVerticalNavModule,
+} from '@clr/angular';
+import { AppRoutingModule } from '@schmsoft/app-routing.module';
 
 import { AsideComponent } from './aside.component';
 
@@ -11,7 +17,13 @@ describe('AsideComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AsideComponent],
-      imports: [BrowserAnimationsModule, ClrVerticalNavModule, ClrLayoutModule],
+      imports: [
+        BrowserAnimationsModule,
+        ClrVerticalNavModule,
+        ClrLayoutModule,
+        ClrNavigationModule,
+        RouterModule.forRoot([]),
+      ],
     }).compileComponents();
   });
 

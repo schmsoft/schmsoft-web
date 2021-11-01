@@ -8,6 +8,7 @@ import { ClarityModule } from '@clr/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql/graphql.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { GraphQLModule } from './graphql/graphql.module';
     AppRoutingModule,
     GraphQLModule,
     HttpClientModule,
+    ReactiveFormsModule,
     ClarityModule,
   ],
   providers: [],

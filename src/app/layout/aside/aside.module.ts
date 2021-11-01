@@ -8,6 +8,7 @@ import {
   ClrVerticalNavModule,
 } from '@clr/angular';
 import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from '@schmsoft/app-routing.module';
 
 @NgModule({
   declarations: [AsideComponent],
@@ -15,8 +16,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ClrIconModule,
     ClrVerticalNavModule,
-    RouterModule,
     ClrLayoutModule,
+    AppRoutingModule,
   ],
   exports: [AsideComponent],
 })

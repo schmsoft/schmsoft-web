@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ClrDatagridModule } from '@clr/angular';
 
 import { PortfolioComponent } from './portfolio.component';
 
@@ -9,6 +10,7 @@ describe('PortfolioComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PortfolioComponent],
+      imports: [ClrDatagridModule],
     }).compileComponents();
   });
 

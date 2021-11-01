@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   ClrButtonModule,
+  ClrFormsModule,
   ClrInputModule,
   ClrLoadingModule,
   ClrPasswordModule,
@@ -20,10 +22,11 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [
         ReactiveFormsModule,
-        AppRoutingModule,
+        RouterModule.forRoot([]),
         ClrPasswordModule,
         ClrInputModule,
         ClrLoadingModule,
+        ClrFormsModule,
       ],
     }).compileComponents();
   });
