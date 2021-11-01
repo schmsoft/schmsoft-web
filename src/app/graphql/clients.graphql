@@ -1,29 +1,36 @@
+fragment OwnerFragment on OwnerType {
+  id
+  created
+  modified
+  roleDefinition
+  user {
+    name
+    firstName
+    lastName
+    email
+  }
+  identificationMethod
+  identificationNumber
+  phoneNumber
+  numberOfDependants
+  gender
+  passportPhoto
+}
+
 query Clients {
   businessOwners {
-    id
-    created
-    modified
-    isRemoved
-    roleDefinition
-    business {
-      name
-    }
-    identificationMethod
-    identificationNumber
-    phoneNumber
-    totalMonthlyIncomeCurrency
-    totalMonthlyIncome
-    numberOfDependants
-    gender
-    maritalStatus
-    passportPhoto
+    ...OwnerFragment
   }
 }
 
-mutation RegisterClient($business: BusinessInput!, $owner: OwnerInput!) {
-  addBusiness(business: $business, owner: $owner) {
-    business {
-      id
+mutation RegisterClient(
+  $business: BusinessInput!
+  $owner: OwnerInput!
+  $user: UserInput!
+) {
+  addBusiness(business: $business, owner: $owner, user: $user) {
+    businessOwner {
+      ...OwnerFragment
     }
   }
 }

@@ -8,7 +8,7 @@ import {
   OwnerMaritalStatus,
   RegisterClientGQL,
 } from '@graphql/generated/models';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-create-client',
@@ -44,12 +44,16 @@ export class CreateClientComponent implements OnInit {
     this.disableNext = true;
 
     const business = this.businessBasicDetailsForm.value;
-
-    console.log({ business });
+    const user = {
+      firstNames: this.basicDetailsForm.value.firstNames,
+      lastName: this.basicDetailsForm.value.lastName,
+      email: this.contactDetailsForm.value.email,
+    };
 
     this.registerClientGQL
       .mutate({
         business,
+        user,
         owner: {
           gender: this.basicDetailsForm.value.gender,
           phoneNumber: this.contactDetailsForm.value.phoneNumber,
@@ -59,7 +63,12 @@ export class CreateClientComponent implements OnInit {
             this.identificationDetailsForm.value.identificationNumber,
         },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        tap(({ data }) => {
+          this.close();
+        })
+      )
       .subscribe();
   }
 

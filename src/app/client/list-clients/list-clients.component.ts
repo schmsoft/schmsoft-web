@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ClientsGQL } from '@graphql/generated/models';
@@ -21,5 +21,17 @@ export class ListClientsComponent implements OnInit {
     this.clients$ = this.clientsGQL
       .fetch()
       .pipe(map(({ data }) => data.businessOwners || []));
+  }
+
+  handleWizardClosed(showForm: boolean) {
+    this.showClientForm = showForm;
+
+    if (!showForm) {
+      this.clients$ = of([]);
+
+      this.clients$ = this.clientsGQL
+        .fetch()
+        .pipe(map(({ data }) => data.businessOwners || []));
+    }
   }
 }

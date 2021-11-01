@@ -22,7 +22,7 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [
         ReactiveFormsModule,
-        RouterModule.forRoot([]),
+        AppRoutingModule,
         ClrPasswordModule,
         ClrInputModule,
         ClrLoadingModule,

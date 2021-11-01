@@ -13,12 +13,14 @@
   <clr-dg-column>Actions</clr-dg-column>
 
   <clr-dg-row *ngFor="let client of clients$ | async">
-    <clr-dg-cell>{{ client.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ client.user.name }}</clr-dg-cell>
     <clr-dg-cell>{{ client.phoneNumber }}</clr-dg-cell>
     <clr-dg-cell>{{ client.identificationNumber }}</clr-dg-cell>
     <clr-dg-cell>{{ client.identificationMethod }}</clr-dg-cell>
     <clr-dg-cell>{{ client.created | date }}</clr-dg-cell>
-    <clr-dg-cell></clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-info btn-sm">Details</button>
+    </clr-dg-cell>
   </clr-dg-row>
 
   <!-- <clr-dg-footer>{{ users.length }} users</clr-dg-footer> -->
@@ -26,5 +28,5 @@
 
 <ssw-create-client
   [showClientForm]="showClientForm"
-  (showClientFormChanged)="showClientForm = $event"
+  (showClientFormChanged)="handleWizardClosed($event)"
 ></ssw-create-client>
