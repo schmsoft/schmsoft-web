@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClrDatagridModule } from '@clr/angular';
 
-import { PortfolioComponent } from './portfolio.component';
+import { ListPortfolioComponent } from './list-portfolio.component';
 
-describe('PortfolioComponent', () => {
-  let component: PortfolioComponent;
-  let fixture: ComponentFixture<PortfolioComponent>;
+describe('ListPortfolioComponent', () => {
+  let component: ListPortfolioComponent;
+  let fixture: ComponentFixture<ListPortfolioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PortfolioComponent],
+      declarations: [ListPortfolioComponent],
       imports: [ClrDatagridModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PortfolioComponent);
+    fixture = TestBed.createComponent(ListPortfolioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { ClrDatagridModule } from '@clr/angular';
-
-import { PortfolioComponent } from './list-portfolio/portfolio.component';
 import { PortfolioRoutingModule } from './portfolio-routing.module';
+import { ListPortfolioModule } from './list-portfolio/list-portfolio.module';
 
 @NgModule({
-  declarations: [PortfolioComponent],
-  imports: [CommonModule, ClrDatagridModule, PortfolioRoutingModule],
-  exports: [PortfolioComponent],
+  declarations: [],
+  imports: [ListPortfolioModule, PortfolioRoutingModule],
 })
 export class PortfolioModule {}

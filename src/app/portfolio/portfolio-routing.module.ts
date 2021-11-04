@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PortfolioComponent } from './list-portfolio/portfolio.component';
+import { ListPortfolioComponent } from './list-portfolio/list-portfolio.component';
 
 const routes: Routes = [
   {
     path: 'portfolio',
-    component: PortfolioComponent,
+    component: ListPortfolioComponent,
   },
 ];
 

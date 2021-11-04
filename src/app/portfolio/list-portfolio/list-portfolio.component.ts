@@ -7,10 +7,10 @@ import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.scss'],
+  templateUrl: './list-portfolio.component.html',
+  styleUrls: ['./list-portfolio.component.scss'],
 })
-export class PortfolioComponent implements OnInit {
+export class ListPortfolioComponent implements OnInit {
   loanPortfolios$!: Observable<any[]>;
 
   constructor(private loanPortfoliosGQL: LoanPortoliosGQL) {}
