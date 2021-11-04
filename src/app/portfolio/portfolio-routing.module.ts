@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PortfolioComponent } from './portfolio.component';
+import { PortfolioComponent } from './list-portfolio/portfolio.component';
 
 const routes: Routes = [
   {
