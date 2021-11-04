@@ -77,8 +77,17 @@
 
   <div class="nav-divider"></div>
 
-  <a clrVerticalNavLink routerLinkActive="active" routerLink="/core/settings">
+  <clr-vertical-nav-group routerLinkActive="active">
     <clr-icon shape="cog" clrVerticalNavIcon></clr-icon>
     Settings
-  </a>
+    <clr-vertical-nav-group-children>
+      <a
+        clrVerticalNavLink
+        routerLink="/core/settings/portfolio"
+        routerLinkActive="active"
+      >
+        Portfolio
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
 </clr-vertical-nav>
