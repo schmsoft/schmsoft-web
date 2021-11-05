@@ -16,11 +16,11 @@ import {
 import { take, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'ssw-edit-portfolio',
-  templateUrl: './edit-portfolio.component.html',
-  styleUrls: ['./edit-portfolio.component.scss'],
+  selector: 'ssw-update-portfolio',
+  templateUrl: './update-portfolio.component.html',
+  styleUrls: ['./update-portfolio.component.scss'],
 })
-export class EditPortfolioComponent implements OnInit, OnChanges {
+export class UpdatePortfolioComponent implements OnInit, OnChanges {
   @Input()
   openModal = false;
 
@@ -43,7 +43,7 @@ export class EditPortfolioComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.portfolio.currentValue) {
+    if (changes.portfolio?.currentValue) {
       this.initForm();
     }
   }

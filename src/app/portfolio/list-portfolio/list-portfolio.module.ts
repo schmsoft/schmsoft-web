@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ClrDatagridModule } from '@clr/angular';
-import { EditPortfolioModule } from '../edit-portfolio/edit-portfolio.module';
+import { UpdatePortfolioModule } from '../update-portfolio/update-portfolio.module';
 import { ListPortfolioComponent } from './list-portfolio.component';
 
 @NgModule({
   declarations: [ListPortfolioComponent],
-  imports: [CommonModule, ClrDatagridModule, EditPortfolioModule],
+  imports: [CommonModule, ClrDatagridModule, UpdatePortfolioModule],
   exports: [ListPortfolioComponent],
 })
 export class ListPortfolioModule {}

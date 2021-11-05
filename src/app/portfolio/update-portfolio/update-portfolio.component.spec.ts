@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditPortfolioComponent } from './edit-portfolio.component';
+import { UpdatePortfolioComponent } from './update-portfolio.component';
 
-describe('EditPortfolioComponent', () => {
-  let component: EditPortfolioComponent;
-  let fixture: ComponentFixture<EditPortfolioComponent>;
+describe('updatePortfolioComponent', () => {
+  let component: UpdatePortfolioComponent;
+  let fixture: ComponentFixture<UpdatePortfolioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditPortfolioComponent],
+      declarations: [UpdatePortfolioComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditPortfolioComponent);
+    fixture = TestBed.createComponent(UpdatePortfolioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
