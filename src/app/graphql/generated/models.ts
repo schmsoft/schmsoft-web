@@ -2377,6 +2377,7 @@ export type LoanPortoliosQuery = {
     Array<
       Maybe<{
         __typename?: 'LoanPortfolioType';
+        id: string;
         name: string;
         description: string;
       }>
@@ -2394,6 +2395,31 @@ export type LoanPortolioQuery = {
     __typename?: 'LoanPortfolioType';
     name: string;
     description: string;
+  }>;
+};
+
+export type CreateLoanPortfolioMutationVariables = Exact<{
+  portfolio: LoanPortfolioInput;
+}>;
+
+export type CreateLoanPortfolioMutation = {
+  __typename?: 'Mutation';
+  addLoanPortfolio?: Maybe<{
+    __typename?: 'AddLoanPortlioMutation';
+    portfolio?: Maybe<{ __typename?: 'LoanPortfolioType'; id: string }>;
+  }>;
+};
+
+export type EditLoanPortfolioMutationVariables = Exact<{
+  portfolio: LoanPortfolioInput;
+  portfolioId: Scalars['ID'];
+}>;
+
+export type EditLoanPortfolioMutation = {
+  __typename?: 'Mutation';
+  updateLoanPortfolio?: Maybe<{
+    __typename?: 'UpdateLoanPortfolioMutation';
+    portfolio?: Maybe<{ __typename?: 'LoanPortfolioType'; id: string }>;
   }>;
 };
 
@@ -2528,6 +2554,7 @@ export class RegisterClientGQL extends Apollo.Mutation<
 export const LoanPortoliosDocument = gql`
   query LoanPortolios {
     loanPortfolios {
+      id
       name
       description
     }
@@ -2564,6 +2591,55 @@ export class LoanPortolioGQL extends Apollo.Query<
   LoanPortolioQueryVariables
 > {
   document = LoanPortolioDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const CreateLoanPortfolioDocument = gql`
+  mutation CreateLoanPortfolio($portfolio: LoanPortfolioInput!) {
+    addLoanPortfolio(portfolio: $portfolio) {
+      portfolio {
+        id
+      }
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CreateLoanPortfolioGQL extends Apollo.Mutation<
+  CreateLoanPortfolioMutation,
+  CreateLoanPortfolioMutationVariables
+> {
+  document = CreateLoanPortfolioDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const EditLoanPortfolioDocument = gql`
+  mutation EditLoanPortfolio(
+    $portfolio: LoanPortfolioInput!
+    $portfolioId: ID!
+  ) {
+    updateLoanPortfolio(portfolio: $portfolio, portfolioId: $portfolioId) {
+      portfolio {
+        id
+      }
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class EditLoanPortfolioGQL extends Apollo.Mutation<
+  EditLoanPortfolioMutation,
+  EditLoanPortfolioMutationVariables
+> {
+  document = EditLoanPortfolioDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

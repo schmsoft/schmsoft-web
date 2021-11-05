@@ -1,5 +1,6 @@
 query LoanPortolios {
   loanPortfolios {
+    id
     name
     description
   }
@@ -9,5 +10,21 @@ query LoanPortolio($id: ID!) {
   loanPortfolio(id: $id) {
     name
     description
+  }
+}
+
+mutation CreateLoanPortfolio($portfolio: LoanPortfolioInput!) {
+  addLoanPortfolio(portfolio: $portfolio) {
+    portfolio {
+      id
+    }
+  }
+}
+
+mutation EditLoanPortfolio($portfolio: LoanPortfolioInput!, $portfolioId: ID!) {
+  updateLoanPortfolio(portfolio: $portfolio, portfolioId: $portfolioId) {
+    portfolio {
+      id
+    }
   }
 }

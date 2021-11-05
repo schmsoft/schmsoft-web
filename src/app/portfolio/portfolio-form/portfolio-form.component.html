@@ -1,0 +1,30 @@
+<form clrForm [formGroup]="formGroup" clrLayout="horizontal">
+  <clr-input-container>
+    <label class="clr-col-4">Portfolio Name</label>
+    <input
+      clrInput
+      class="clr-col-8"
+      type="text"
+      formControlName="name"
+      width="100%"
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Name is required!</clr-control-error
+    >
+  </clr-input-container>
+
+  <clr-textarea-container>
+    <label class="clr-col-4">Portfolio Description</label>
+    <textarea
+      clrTextarea
+      class="clr-col-8"
+      name="description"
+      rows="8"
+      formControlName="description"
+      placeholder="What is the portfolio about?"
+    ></textarea>
+    <clr-control-error *clrIfError="'required'"
+      >Description is required!</clr-control-error
+    >
+  </clr-textarea-container>
+</form>

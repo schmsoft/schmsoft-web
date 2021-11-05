@@ -11,7 +11,10 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./list-portfolio.component.scss'],
 })
 export class ListPortfolioComponent implements OnInit {
+  showPortfolioModal = false;
+
   loanPortfolios$!: Observable<any[]>;
+  loanPortfolio: any;
 
   constructor(private loanPortfoliosGQL: LoanPortoliosGQL) {}
 
@@ -20,5 +23,15 @@ export class ListPortfolioComponent implements OnInit {
       map(({ data }) => data.loanPortfolios || []),
       tap((data) => console.log(data))
     );
+  }
+
+  editPortfolio(loanPortfolio: any) {
+    this.loanPortfolio = loanPortfolio;
+    this.showPortfolioModal = true;
+  }
+
+  createPortfolio() {
+    this.loanPortfolio = null;
+    this.showPortfolioModal = true;
   }
 }
