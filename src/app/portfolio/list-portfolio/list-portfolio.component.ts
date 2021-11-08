@@ -1,27 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LoanPortfolioType, LoanPortoliosGQL } from '@graphql/generated/models';
 
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-portfolio',
   templateUrl: './list-portfolio.component.html',
   styleUrls: ['./list-portfolio.component.scss'],
 })
-export class ListPortfolioComponent implements OnInit {
+export class ListPortfolioComponent implements OnInit, OnDestroy {
   showPortfolioModal = false;
 
-  loanPortfolios$!: Observable<any[]>;
+  loanPortfolios!: LoanPortfolioType[];
   loanPortfolio: any;
+  destroyed$ = new Subject<boolean>();
 
   constructor(private loanPortfoliosGQL: LoanPortoliosGQL) {}
 
   ngOnInit(): void {
-    this.loanPortfolios$ = this.loanPortfoliosGQL.fetch().pipe(
-      map(({ data }) => data.loanPortfolios || []),
-      tap((data) => console.log(data))
+    this.fetchLoanPortfolios();
+  }
+
+  private fetchLoanPortfolios() {
+    this.loanPortfoliosGQL
+      .fetch()
+      .pipe(
+        takeUntil(this.destroyed$),
+        map(({ data }) => {
+          this.loanPortfolios = data.loanPortfolios || ([] as any);
+          return this.loanPortfolios;
+        }),
+        tap((data) => console.log(data))
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
+  }
+
+  portfolioCreated(portfolio: LoanPortfolioType) {
+    this.loanPortfolios = [portfolio, ...this.loanPortfolios];
+  }
+  portfolioUpdated(portfolio: LoanPortfolioType) {
+    console.log(portfolio);
+    this.loanPortfolios = this.loanPortfolios.map((lp) =>
+      lp.id === portfolio.id ? { ...lp, ...portfolio } : lp
     );
   }
 
