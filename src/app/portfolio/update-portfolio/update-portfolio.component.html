@@ -1,0 +1,22 @@
+<clr-modal [(clrModalOpen)]="openModal" (clrModalOpenChange)="close()">
+  <h3 class="modal-title">{{ portfolio ? "Edit" : "Create" }} Portfolio</h3>
+  <div class="modal-body">
+    <ssw-portfolio-form
+      [formGroup]="formGroup"
+      [portfolio]="portfolio"
+    ></ssw-portfolio-form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="close()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="save()"
+      [disabled]="formGroup.invalid"
+    >
+      Save
+    </button>
+  </div>
+</clr-modal>

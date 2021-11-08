@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListPortfolioComponent } from './list-portfolio/list-portfolio.component';
 
 const routes: Routes = [
   {
-    path: 'settings',
-    loadChildren: () =>
-      import('@schmsoft/portfolio/portfolio.module').then(
-        (m) => m.PortfolioModule
-      ),
+    path: 'portfolio',
+    component: ListPortfolioComponent,
   },
 ];
 
@@ -15,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SettingsRoutingModule {}
+export class PortfolioRoutingModule {}

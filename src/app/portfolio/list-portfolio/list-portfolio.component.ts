@@ -7,11 +7,14 @@ import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.scss'],
+  templateUrl: './list-portfolio.component.html',
+  styleUrls: ['./list-portfolio.component.scss'],
 })
-export class PortfolioComponent implements OnInit {
+export class ListPortfolioComponent implements OnInit {
+  showPortfolioModal = false;
+
   loanPortfolios$!: Observable<any[]>;
+  loanPortfolio: any;
 
   constructor(private loanPortfoliosGQL: LoanPortoliosGQL) {}
 
@@ -20,5 +23,15 @@ export class PortfolioComponent implements OnInit {
       map(({ data }) => data.loanPortfolios || []),
       tap((data) => console.log(data))
     );
+  }
+
+  editPortfolio(loanPortfolio: any) {
+    this.loanPortfolio = loanPortfolio;
+    this.showPortfolioModal = true;
+  }
+
+  createPortfolio() {
+    this.loanPortfolio = null;
+    this.showPortfolioModal = true;
   }
 }

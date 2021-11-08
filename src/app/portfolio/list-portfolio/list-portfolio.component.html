@@ -1,6 +1,8 @@
 <h1 class="page-header">Loan Portfolios</h1>
 
-<button class="btn btn-primary">New Portfolio</button>
+<button class="btn btn-primary" (click)="createPortfolio()">
+  New Portfolio
+</button>
 
 <clr-datagrid>
   <clr-dg-column>Portfolio</clr-dg-column>
@@ -10,8 +12,16 @@
     <clr-dg-cell>{{ loanPortfolio.name }}</clr-dg-cell>
     <clr-dg-cell>{{ loanPortfolio.description }}</clr-dg-cell>
     <clr-dg-cell>
-      <button class="btn btn-sm">Update</button>
+      <button class="btn btn-sm" (click)="editPortfolio(loanPortfolio)">
+        Update
+      </button>
       <button class="btn btn-sm btn-outline-danger">Delete</button>
     </clr-dg-cell>
   </clr-dg-row>
 </clr-datagrid>
+
+<ssw-update-portfolio
+  [openModal]="showPortfolioModal"
+  (openModalChanged)="showPortfolioModal = $event; loanPortfolio = null"
+  [portfolio]="loanPortfolio"
+></ssw-update-portfolio>
