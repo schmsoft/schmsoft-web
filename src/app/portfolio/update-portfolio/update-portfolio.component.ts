@@ -27,6 +27,12 @@ export class UpdatePortfolioComponent implements OnInit, OnChanges {
   @Output()
   openModalChanged = new EventEmitter<boolean>();
 
+  @Output()
+  portfolioCreated = new EventEmitter<LoanPortfolioType>();
+
+  @Output()
+  portfolioUpdated = new EventEmitter<LoanPortfolioType>();
+
   @Input()
   portfolio: LoanPortfolioType = null as any;
 
@@ -76,6 +82,11 @@ export class UpdatePortfolioComponent implements OnInit, OnChanges {
         .pipe(
           take(1),
           tap((resp) => {
+            const updatedPortfolio = {
+              ...this.portfolio,
+              ...this.formGroup.value,
+            };
+            this.portfolioUpdated.emit(updatedPortfolio);
             console.log(resp.data?.updateLoanPortfolio?.portfolio);
             this.openModalChanged.emit(false);
           })
@@ -86,9 +97,14 @@ export class UpdatePortfolioComponent implements OnInit, OnChanges {
         .mutate({ portfolio: this.formGroup.value })
         .pipe(
           take(1),
-          tap((resp) => {
+          tap(({ data }) => {
             this.openModalChanged.emit(false);
-            console.log(resp.data?.addLoanPortfolio?.portfolio);
+            const portfolio = {
+              ...this.formGroup.value,
+              id: data?.addLoanPortfolio?.portfolio?.id,
+            };
+            this.portfolioCreated.emit(portfolio);
+            console.log(data?.addLoanPortfolio?.portfolio);
           })
         )
         .subscribe();
