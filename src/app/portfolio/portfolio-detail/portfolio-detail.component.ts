@@ -5,9 +5,8 @@ import {
   LoanPortolioGQL,
   StaffUsersGQL,
   UpdatePortfolioManagersGQL,
-  UserType,
 } from '@graphql/generated/models';
-import { concat, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
@@ -15,22 +14,25 @@ import { map, take, takeUntil, tap } from 'rxjs/operators';
   templateUrl: './portfolio-detail.component.html',
   styleUrls: ['./portfolio-detail.component.scss'],
 })
-export class PortfolioDetailComponent {
+export class PortfolioDetailComponent implements OnDestroy, OnInit {
   destroyed$ = new Subject<LoanPortfolioType>();
   loanPortfolio: any;
   staffUsers$: Observable<any> | undefined;
   id: any;
   managers: any[] = [];
+
   constructor(
     private loanPortfolioGQL: LoanPortolioGQL,
     private staffUsersGQL: StaffUsersGQL,
     private updatePortfolioManagersGQL: UpdatePortfolioManagersGQL,
     private route: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
     this.fetchPortfolio();
     this.fetchStaffUsers();
   }
+
   private fetchPortfolio() {
     this.id = this.route.snapshot.params.id;
     this.loanPortfolioGQL
@@ -51,6 +53,7 @@ export class PortfolioDetailComponent {
       .fetch()
       .pipe(map(({ data }) => data?.staffUsers));
   }
+
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.unsubscribe();
