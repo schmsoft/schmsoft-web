@@ -56,6 +56,11 @@ export type AddressInput = {
   streetNumber?: Maybe<Scalars['String']>;
 };
 
+export type AssignPortfolioManagerMutation = {
+  __typename?: 'AssignPortfolioManagerMutation';
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 /** An enumeration. */
 export enum BusinessBusinessType {
   /** Limited Liability Company */
@@ -1446,6 +1451,34 @@ export type BusinessType = {
   yearsInCurrentLocation: Scalars['Int'];
 };
 
+/** An enumeration. */
+export enum ContactRecordMechanism {
+  /** Email */
+  Email = 'EMAIL',
+  /** Slack */
+  Slack = 'SLACK',
+  /** Text Message (SMS) */
+  Sms = 'SMS',
+}
+
+export type ContactRecordType = {
+  __typename?: 'ContactRecordType';
+  created: Scalars['DateTime'];
+  definitionKey: Scalars['String'];
+  id: Scalars['ID'];
+  mechanism: ContactRecordMechanism;
+  modified: Scalars['DateTime'];
+  sentBy?: Maybe<UserType>;
+  sentFromEmailAddress: Scalars['String'];
+  sentFromSenderId: Scalars['String'];
+  sentTo: UserType;
+  sentToEmailAddress: Scalars['String'];
+  sentToPhoneNumber: Scalars['String'];
+  sentToSlackUsernameOrChannel: Scalars['String'];
+  subject: Scalars['String'];
+  textContent: Scalars['String'];
+};
+
 export type CountryInput = {
   code?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
@@ -1453,7 +1486,7 @@ export type CountryInput = {
 };
 
 export type LoanPortfolioInput = {
-  description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
   name: Scalars['String'];
 };
 
@@ -1488,11 +1521,14 @@ export type Mutation = {
   __typename?: 'Mutation';
   addBusiness?: Maybe<AddBusinessMutation>;
   addLoanPortfolio?: Maybe<AddLoanPortlioMutation>;
+  assignPortfolioManager?: Maybe<AssignPortfolioManagerMutation>;
   refreshToken?: Maybe<Refresh>;
   revokeToken?: Maybe<Revoke>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
+  unAssignPortfolioManager?: Maybe<UnAssignPortfolioManagerMutation>;
   updateLoanPortfolio?: Maybe<UpdateLoanPortfolioMutation>;
+  updatePortfolioManagers?: Maybe<UpdatePortfolioManagers>;
   verifyToken?: Maybe<Verify>;
 };
 
@@ -1504,6 +1540,11 @@ export type MutationAddBusinessArgs = {
 
 export type MutationAddLoanPortfolioArgs = {
   portfolio: LoanPortfolioInput;
+};
+
+export type MutationAssignPortfolioManagerArgs = {
+  portfolioId: Scalars['ID'];
+  userId: Scalars['ID'];
 };
 
 export type MutationRefreshTokenArgs = {
@@ -1519,9 +1560,19 @@ export type MutationTokenAuthArgs = {
   username: Scalars['String'];
 };
 
-export type MutationUpdateLoanPortfolioArgs = {
-  portfolio: LoanPortfolioInput;
+export type MutationUnAssignPortfolioManagerArgs = {
   portfolioId: Scalars['ID'];
+  userId: Scalars['ID'];
+};
+
+export type MutationUpdateLoanPortfolioArgs = {
+  portfolio?: Maybe<LoanPortfolioInput>;
+  portfolioId: Scalars['ID'];
+};
+
+export type MutationUpdatePortfolioManagersArgs = {
+  portfolioId: Scalars['ID'];
+  userIds: Array<Maybe<Scalars['ID']>>;
 };
 
 export type MutationVerifyTokenArgs = {
@@ -2221,9 +2272,11 @@ export type Query = {
   business?: Maybe<BusinessType>;
   businessOwners?: Maybe<Array<Maybe<OwnerType>>>;
   businesses?: Maybe<Array<Maybe<BusinessType>>>;
+  contactRecords?: Maybe<Array<Maybe<ContactRecordType>>>;
   loanPortfolio?: Maybe<LoanPortfolioType>;
   loanPortfolios?: Maybe<Array<Maybe<LoanPortfolioType>>>;
   me?: Maybe<UserType>;
+  staffUsers?: Maybe<Array<Maybe<UserType>>>;
   users?: Maybe<Array<Maybe<UserType>>>;
 };
 
@@ -2258,9 +2311,19 @@ export type StateInput = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type UnAssignPortfolioManagerMutation = {
+  __typename?: 'UnAssignPortfolioManagerMutation';
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 export type UpdateLoanPortfolioMutation = {
   __typename?: 'UpdateLoanPortfolioMutation';
   portfolio?: Maybe<LoanPortfolioType>;
+};
+
+export type UpdatePortfolioManagers = {
+  __typename?: 'UpdatePortfolioManagers';
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type UserInput = {
@@ -2393,8 +2456,14 @@ export type LoanPortolioQuery = {
   __typename?: 'Query';
   loanPortfolio?: Maybe<{
     __typename?: 'LoanPortfolioType';
+    id: string;
     name: string;
     description: string;
+    owners: Array<{
+      __typename?: 'UserType';
+      id: string;
+      name?: Maybe<string>;
+    }>;
   }>;
 };
 
@@ -2420,6 +2489,19 @@ export type EditLoanPortfolioMutation = {
   updateLoanPortfolio?: Maybe<{
     __typename?: 'UpdateLoanPortfolioMutation';
     portfolio?: Maybe<{ __typename?: 'LoanPortfolioType'; id: string }>;
+  }>;
+};
+
+export type UpdatePortfolioManagersMutationVariables = Exact<{
+  portfolioId: Scalars['ID'];
+  userIds: Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>;
+}>;
+
+export type UpdatePortfolioManagersMutation = {
+  __typename?: 'Mutation';
+  updatePortfolioManagers?: Maybe<{
+    __typename?: 'UpdatePortfolioManagers';
+    success?: Maybe<boolean>;
   }>;
 };
 
@@ -2451,6 +2533,15 @@ export type MeQuery = {
     lastName: string;
     email: string;
   }>;
+};
+
+export type StaffUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type StaffUsersQuery = {
+  __typename?: 'Query';
+  staffUsers?: Maybe<
+    Array<Maybe<{ __typename?: 'UserType'; id: string; name?: Maybe<string> }>>
+  >;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -2577,8 +2668,13 @@ export class LoanPortoliosGQL extends Apollo.Query<
 export const LoanPortolioDocument = gql`
   query LoanPortolio($id: ID!) {
     loanPortfolio(id: $id) {
+      id
       name
       description
+      owners {
+        id
+        name
+      }
     }
   }
 `;
@@ -2645,6 +2741,27 @@ export class EditLoanPortfolioGQL extends Apollo.Mutation<
     super(apollo);
   }
 }
+export const UpdatePortfolioManagersDocument = gql`
+  mutation updatePortfolioManagers($portfolioId: ID!, $userIds: [ID]!) {
+    updatePortfolioManagers(portfolioId: $portfolioId, userIds: $userIds) {
+      success
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UpdatePortfolioManagersGQL extends Apollo.Mutation<
+  UpdatePortfolioManagersMutation,
+  UpdatePortfolioManagersMutationVariables
+> {
+  document = UpdatePortfolioManagersDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UsersDocument = gql`
   query Users {
     users {
@@ -2682,6 +2799,28 @@ export const MeDocument = gql`
 })
 export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
   document = MeDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const StaffUsersDocument = gql`
+  query StaffUsers {
+    staffUsers {
+      id
+      name
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class StaffUsersGQL extends Apollo.Query<
+  StaffUsersQuery,
+  StaffUsersQueryVariables
+> {
+  document = StaffUsersDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
