@@ -87,7 +87,6 @@ export class UpdatePortfolioComponent implements OnInit, OnChanges {
               ...this.formGroup.value,
             };
             this.portfolioUpdated.emit(updatedPortfolio);
-            console.log(resp.data?.updateLoanPortfolio?.portfolio);
             this.openModalChanged.emit(false);
           })
         )
@@ -104,7 +103,6 @@ export class UpdatePortfolioComponent implements OnInit, OnChanges {
               id: data?.addLoanPortfolio?.portfolio?.id,
             };
             this.portfolioCreated.emit(portfolio);
-            console.log(data?.addLoanPortfolio?.portfolio);
           })
         )
         .subscribe();

@@ -1,0 +1,52 @@
+<div>
+  <h1 class="page-header">{{ loanPortfolio?.name | titlecase }}</h1>
+</div>
+
+<clr-datagrid>
+  <clr-dg-column>
+    <clr-dg-cell>Portfolio Name</clr-dg-cell>
+    <clr-dg-cell>Portfolio Description</clr-dg-cell>
+  </clr-dg-column>
+  <clr-dg-row>
+    <clr-dg-cell>{{ loanPortfolio?.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ loanPortfolio?.description }}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+
+<clr-datagrid>
+  <clr-dg-column>
+    <clr-dg-cell>Assign / UnAssign Managers</clr-dg-cell>
+  </clr-dg-column>
+  <clr-dg-row>
+    <clr-dg-cell>
+      <clr-combobox-container *ngIf="loanPortfolio">
+        <clr-combobox
+          [(ngModel)]="managers"
+          [clrMulti]="true"
+          (clrSelectionChange)="updateManagers()"
+        >
+          <ng-container *clrOptionSelected="let owner">
+            <clr-icon shape="user" role="img" aria-label="manager"></clr-icon>
+            {{ owner?.name }}
+          </ng-container>
+          <clr-options>
+            <clr-option
+              *clrOptionItems="
+                let staffUser of staffUsers$ | async;
+                field: 'name'
+              "
+              [clrValue]="staffUser"
+            >
+              <clr-icon shape="user" aria-label="manager-icon"></clr-icon>
+              {{ staffUser?.name }}
+            </clr-option>
+          </clr-options>
+        </clr-combobox>
+        <clr-control-helper
+          >Type to search manager and select from the dropdown
+          list</clr-control-helper
+        >
+      </clr-combobox-container>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

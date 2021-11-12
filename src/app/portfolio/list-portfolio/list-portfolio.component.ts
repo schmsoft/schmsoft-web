@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoanPortfolioType, LoanPortoliosGQL } from '@graphql/generated/models';
 
 import { Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-portfolio',
@@ -31,8 +31,7 @@ export class ListPortfolioComponent implements OnInit, OnDestroy {
         map(({ data }) => {
           this.loanPortfolios = data.loanPortfolios || ([] as any);
           return this.loanPortfolios;
-        }),
-        tap((data) => console.log(data))
+        })
       )
       .subscribe();
   }
@@ -46,7 +45,6 @@ export class ListPortfolioComponent implements OnInit, OnDestroy {
     this.loanPortfolios = [portfolio, ...this.loanPortfolios];
   }
   portfolioUpdated(portfolio: LoanPortfolioType) {
-    console.log(portfolio);
     this.loanPortfolios = this.loanPortfolios.map((lp) =>
       lp.id === portfolio.id ? { ...lp, ...portfolio } : lp
     );
