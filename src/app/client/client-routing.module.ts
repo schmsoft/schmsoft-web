@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateClientComponent } from './create-client/create-client.component';
+import { DetailsClientComponent } from './details-client/details-client.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
 
 const routes: Routes = [
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: '',
     component: ListClientsComponent,
+  },
+  {
+    path: ':id',
+    component: DetailsClientComponent,
   },
 ];
 
