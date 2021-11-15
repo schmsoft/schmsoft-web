@@ -1,1 +1,28 @@
-<p>details-client works!</p>
+<h1 class="page-header">
+  <a [routerLink]="['/core/clients']">
+    <clr-icon shape="undo"></clr-icon>
+  </a>
+  Name
+</h1>
+
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>Personal Details</button>
+    <clr-tab-content *clrIfActive> Dashboard content </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Business Details</button>
+    <clr-tab-content *clrIfActive> Business content </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Communication Timeline</button>
+    <clr-tab-content *clrIfActive> Communication content </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Loans</button>
+    <clr-tab-content *clrIfActive> Loans content </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
