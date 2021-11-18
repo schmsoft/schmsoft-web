@@ -19,7 +19,9 @@
     <clr-dg-cell>{{ client.identificationMethod }}</clr-dg-cell>
     <clr-dg-cell>{{ client.created | date }}</clr-dg-cell>
     <clr-dg-cell>
-      <a [routerLink]="['/core/clients', client.id]" class="btn btn-info btn-sm"
+      <a
+        [routerLink]="['/core/clients', client.business.id]"
+        class="btn btn-info btn-sm"
         >Details</a
       >
     </clr-dg-cell>

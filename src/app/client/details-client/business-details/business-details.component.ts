@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ssw-business-details',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-details.component.scss'],
 })
 export class BusinessDetailsComponent implements OnInit {
+  @Input()
+  businessData: any;
+
   constructor() {}
 
   ngOnInit(): void {}

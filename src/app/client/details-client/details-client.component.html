@@ -2,21 +2,29 @@
   <a [routerLink]="['/core/clients']">
     <clr-icon shape="undo"></clr-icon>
   </a>
-  Name
+  {{ businessData?.name }}
 </h1>
-
 <clr-tabs>
   <clr-tab>
-    <button clrTabLink>Personal Details</button>
+    <button clrTabLink>Business Owners</button>
     <clr-tab-content *clrIfActive>
-      <ssw-personal-details></ssw-personal-details>
+      <ssw-owners-details [ownersData]="ownersData"></ssw-owners-details>
     </clr-tab-content>
   </clr-tab>
 
   <clr-tab>
     <button clrTabLink>Business Details</button>
     <clr-tab-content *clrIfActive>
-      <ssw-business-details></ssw-business-details>
+      <ssw-business-details
+        [businessData]="businessData"
+      ></ssw-business-details>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Sales Details</button>
+    <clr-tab-content *clrIfActive>
+      <ssw-sales-details [salesData]="salesData"></ssw-sales-details>
     </clr-tab-content>
   </clr-tab>
 

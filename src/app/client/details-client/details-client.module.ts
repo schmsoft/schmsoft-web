@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { DetailsClientComponent } from './details-client.component';
 import { ClrIconModule, ClrTabsModule } from '@clr/angular';
 import { RouterModule } from '@angular/router';
-import { PersonalDetailsModule } from './personal-details/personal-details.module';
+import { OwnersDetailsModule } from './owners-details/owners-details.module';
 import { BusinessDetailsModule } from './business-details/business-details.module';
+import { SalesDetailsModule } from './sales-details/sales-details.module';
 
 @NgModule({
   declarations: [DetailsClientComponent],
@@ -13,8 +14,9 @@ import { BusinessDetailsModule } from './business-details/business-details.modul
     CommonModule,
     ClrTabsModule,
     ClrIconModule,
-    PersonalDetailsModule,
+    OwnersDetailsModule,
     BusinessDetailsModule,
+    SalesDetailsModule,
     RouterModule,
   ],
   exports: [DetailsClientComponent],
