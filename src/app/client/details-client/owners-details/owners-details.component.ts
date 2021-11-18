@@ -1,15 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ssw-owners-details',
   templateUrl: './owners-details.component.html',
   styleUrls: ['./owners-details.component.scss'],
 })
-export class OwnersDetailsComponent implements OnInit {
+export class OwnersDetailsComponent {
   @Input()
   ownersData: any;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
