@@ -9,13 +9,22 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, finalize, map, switchMap, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import {
+  catchError,
+  filter,
+  finalize,
+  map,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 
 import { Token } from '../models/token';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
 import { Router } from '@angular/router';
 import { RefreshTokenGQL } from '@graphql/generated/models';
+import { GraphQLClients } from '@graphql/graphql.module';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -45,7 +54,9 @@ export class AuthInterceptor implements HttpInterceptor {
     private refreshTokenGQL: RefreshTokenGQL,
     private tokenStorageService: TokenStorageService,
     private router: Router
-  ) {}
+  ) {
+    this.refreshTokenGQL.client = GraphQLClients.PUBLIC;
+  }
 
   intercept(
     request: HttpRequest<unknown>,
@@ -55,6 +66,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       switchMap((event) => {
+        if (event.type === HttpEventType.Response && event.status === 403) {
+          this.redirectToLogin();
+          return of(event);
+        }
+
         if (
           event.type === HttpEventType.Response &&
           event.status === 200 &&
@@ -155,6 +171,9 @@ export class AuthInterceptor implements HttpInterceptor {
       )
       .pipe(
         map(({ data }) => data?.refreshToken),
+        catchError((_) => {
+          return of(false);
+        }),
         tap((token: any) => {
           if (!!token) {
             this.tokenStorageService.saveToken(token);

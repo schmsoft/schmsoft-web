@@ -9,6 +9,7 @@ import { ClrLoadingState } from '@clr/angular';
 
 import { TokenStorageService } from '@schmsoft/auth/services/token-storage/token-storage.service';
 import { LoginGQL } from '@schmsoft/graphql/generated/models';
+import { GraphQLClients } from '@graphql/graphql.module';
 
 @Component({
   selector: 'ssw-login',
@@ -27,7 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private loginGQL: LoginGQL,
     private tokenStorageService: TokenStorageService,
     private router: Router
-  ) {}
+  ) {
+    this.loginGQL.client = GraphQLClients.PUBLIC;
+  }
 
   ngOnInit() {
     this.initLoginForm();

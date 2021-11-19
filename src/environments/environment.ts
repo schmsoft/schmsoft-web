@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   defaultGraphUri: 'http://localhost:8000/graphql',
-  publicGraphUri: 'http://locahost:8000/public-graphql',
+  publicGraphUri: 'http://localhost:8000/graphql-public',
 };
 
 /*
