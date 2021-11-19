@@ -8,8 +8,13 @@ query LoanPortolios {
 
 query LoanPortolio($id: ID!) {
   loanPortfolio(id: $id) {
+    id
     name
     description
+    owners {
+      id
+      name
+    }
   }
 }
 
@@ -26,5 +31,11 @@ mutation EditLoanPortfolio($portfolio: LoanPortfolioInput!, $portfolioId: ID!) {
     portfolio {
       id
     }
+  }
+}
+
+mutation updatePortfolioManagers($portfolioId: ID!, $userIds: [ID]!) {
+  updatePortfolioManagers(portfolioId: $portfolioId, userIds: $userIds) {
+    success
   }
 }

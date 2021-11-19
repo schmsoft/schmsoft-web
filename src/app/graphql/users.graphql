@@ -16,6 +16,13 @@ query Me {
   }
 }
 
+query StaffUsers {
+  staffUsers {
+    id
+    name
+  }
+}
+
 mutation Login($username: String!, $password: String!) {
   tokenAuth(username: $username, password: $password) {
     token
