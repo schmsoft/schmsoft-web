@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-block">
+    <div class="card-text">
+      <div class="clr-row clr-align-items-start">
+        <div class="clr-col p2">Operating Currency</div>
+        <div class="clr-col p3">{{ salesData?.operatingCapitalCurrency }}</div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Operating Capital</div>
+        <div class="clr-col p3">
+          {{ salesData?.operatingCapital | currency: "ksh" }}
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Daily Sales Currency</div>
+        <div class="clr-col p3">
+          {{ salesData?.dailySalesCurrency }}
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Daily Sales</div>
+        <div class="clr-col p3">
+          {{ salesData?.dailySales | currency: "ksh" }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

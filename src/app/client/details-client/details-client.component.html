@@ -1,0 +1,40 @@
+<h1 class="page-header">
+  <a [routerLink]="['/core/clients']">
+    <clr-icon shape="undo"></clr-icon>
+  </a>
+  {{ businessData?.name }}
+</h1>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>Business Owners</button>
+    <clr-tab-content *clrIfActive>
+      <ssw-owners-details [ownersData]="ownersData"></ssw-owners-details>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Business Details</button>
+    <clr-tab-content *clrIfActive>
+      <ssw-business-details
+        [businessData]="businessData"
+      ></ssw-business-details>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Sales Details</button>
+    <clr-tab-content *clrIfActive>
+      <ssw-sales-details [salesData]="salesData"></ssw-sales-details>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Communication Timeline</button>
+    <clr-tab-content *clrIfActive> Communication content </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>Loans</button>
+    <clr-tab-content *clrIfActive> Loans content </clr-tab-content>
+  </clr-tab>
+</clr-tabs>

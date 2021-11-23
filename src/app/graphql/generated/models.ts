@@ -2367,6 +2367,29 @@ export type OwnerFragmentFragment = {
     lastName: string;
     email: string;
   };
+  business: { __typename?: 'BusinessType'; id: string };
+};
+
+export type BusinessFragmentFragment = {
+  __typename?: 'BusinessType';
+  id: string;
+  created: any;
+  modified: any;
+  name: string;
+  description: string;
+  businessType?: Maybe<BusinessBusinessType>;
+  category?: Maybe<BusinessCategory>;
+  registrationNumber?: Maybe<string>;
+  status?: Maybe<BusinessStatus>;
+  yearsInCurrentLocation: number;
+  operatingCapitalCurrency: BusinessOperatingCapitalCurrency;
+  operatingCapital?: Maybe<string>;
+  dailySalesCurrency: BusinessDailySalesCurrency;
+  dailySales?: Maybe<string>;
+  ownerSet: Array<{
+    __typename?: 'OwnerType';
+    user: { __typename?: 'UserType'; name?: Maybe<string>; email: string };
+  }>;
 };
 
 export type ClientsQueryVariables = Exact<{ [key: string]: never }>;
@@ -2394,9 +2417,39 @@ export type ClientsQuery = {
           lastName: string;
           email: string;
         };
+        business: { __typename?: 'BusinessType'; id: string };
       }>
     >
   >;
+};
+
+export type BusinessQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type BusinessQuery = {
+  __typename?: 'Query';
+  business?: Maybe<{
+    __typename?: 'BusinessType';
+    id: string;
+    created: any;
+    modified: any;
+    name: string;
+    description: string;
+    businessType?: Maybe<BusinessBusinessType>;
+    category?: Maybe<BusinessCategory>;
+    registrationNumber?: Maybe<string>;
+    status?: Maybe<BusinessStatus>;
+    yearsInCurrentLocation: number;
+    operatingCapitalCurrency: BusinessOperatingCapitalCurrency;
+    operatingCapital?: Maybe<string>;
+    dailySalesCurrency: BusinessDailySalesCurrency;
+    dailySales?: Maybe<string>;
+    ownerSet: Array<{
+      __typename?: 'OwnerType';
+      user: { __typename?: 'UserType'; name?: Maybe<string>; email: string };
+    }>;
+  }>;
 };
 
 export type RegisterClientMutationVariables = Exact<{
@@ -2428,6 +2481,7 @@ export type RegisterClientMutation = {
         lastName: string;
         email: string;
       };
+      business: { __typename?: 'BusinessType'; id: string };
     }>;
   }>;
 };
@@ -2584,12 +2638,39 @@ export const OwnerFragmentFragmentDoc = gql`
       lastName
       email
     }
+    business {
+      id
+    }
     identificationMethod
     identificationNumber
     phoneNumber
     numberOfDependants
     gender
     passportPhoto
+  }
+`;
+export const BusinessFragmentFragmentDoc = gql`
+  fragment BusinessFragment on BusinessType {
+    id
+    created
+    modified
+    name
+    description
+    businessType
+    category
+    registrationNumber
+    status
+    yearsInCurrentLocation
+    operatingCapitalCurrency
+    operatingCapital
+    dailySalesCurrency
+    dailySales
+    ownerSet {
+      user {
+        name
+        email
+      }
+    }
   }
 `;
 export const ClientsDocument = gql`
@@ -2609,6 +2690,28 @@ export class ClientsGQL extends Apollo.Query<
   ClientsQueryVariables
 > {
   document = ClientsDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const BusinessDocument = gql`
+  query Business($id: ID!) {
+    business(id: $id) {
+      ...BusinessFragment
+    }
+  }
+  ${BusinessFragmentFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BusinessGQL extends Apollo.Query<
+  BusinessQuery,
+  BusinessQueryVariables
+> {
+  document = BusinessDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
