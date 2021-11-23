@@ -4,7 +4,7 @@ import { SmsComponent } from './sms/sms.component';
 
 const routes: Routes = [
   {
-    path: 'message',
+    path: '',
     component: SmsComponent,
   },
 ];
