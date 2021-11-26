@@ -1,1 +1,55 @@
-<p>sms works!</p>
+<h1 class="page-header">Send Message</h1>
+<h2 class="p3">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dolores
+  voluptatem modi amet cum iusto itaque velit minus? Eaque fugiat fugit sit,
+  consectetur earum iure assumenda? Unde fugit ducimus aperiam. Laudantium,
+  suscipit officia esse hic ex consequuntur optio, quia quo ullam earum
+  consectetur deserunt aliquam eligendi iste labore totam perspiciatis quibusdam
+  dolorum dolore deleniti molestiae ipsum temporibus! Atque, dolorem facere?
+</h2>
+
+<clr-datagrid>
+  <clr-dg-row>
+    <clr-dg-cell>
+      <clr-combobox-container *ngIf="true">
+        <label>Phone Number(s)</label>
+        <clr-combobox
+          [(ngModel)]="selectedUsers"
+          [clrMulti]="true"
+          (clrSelectionChange)="updateSelectedUsers()"
+        >
+          <ng-container *clrOptionSelected="let user">
+            <clr-icon shape="user" role="img" aria-label="manager"></clr-icon>
+            {{ user?.phone }}
+          </ng-container>
+          <clr-options>
+            <clr-option
+              *clrOptionItems="let user of users$ | async; field: 'name'"
+              [clrValue]="user"
+            >
+              <clr-icon shape="user" aria-label="manager-icon"></clr-icon>
+              {{ user?.name }}
+            </clr-option>
+          </clr-options>
+        </clr-combobox>
+        <clr-control-helper
+          >Type phone number and select from the dropdown
+          list</clr-control-helper
+        >
+      </clr-combobox-container>
+      <clr-textarea-container>
+        <label>Message</label>
+        <textarea
+          clrTextarea
+          [(ngModel)]="message"
+          name="message"
+          cols="40"
+          rows="7"
+          required
+        ></textarea>
+        <clr-control-helper>Type in the message</clr-control-helper>
+      </clr-textarea-container>
+      <button class="btn">Send Message</button>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
