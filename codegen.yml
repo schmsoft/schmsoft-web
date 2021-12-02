@@ -1,5 +1,9 @@
 overwrite: true
-schema: http://localhost:8000/graphql
+schema:
+  - http://localhost:8000/graphql:
+      headers:
+        Authorization: "JWT SOME-TOKEN"
+  - http://localhost:8000/graphql-public
 documents: "src/app/**/*.graphql"
 generates:
   src/app/graphql/generated/models.ts:
