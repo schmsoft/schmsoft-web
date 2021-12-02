@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-block">
+    <div class="card-text" *ngFor="let owner of ownersData; index as idx">
+      <div class="clr-row clr-align-items-start">
+        <div class="clr-col p3">{{ idx + 1 }}. {{ owner.user.name }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,11 @@
     <clr-dg-cell>{{ client.identificationMethod }}</clr-dg-cell>
     <clr-dg-cell>{{ client.created | date }}</clr-dg-cell>
     <clr-dg-cell>
-      <button class="btn btn-info btn-sm">Details</button>
+      <a
+        [routerLink]="['/core/clients', client.business.id]"
+        class="btn btn-info btn-sm"
+        >Details</a
+      >
     </clr-dg-cell>
   </clr-dg-row>
 

@@ -1,0 +1,12 @@
+::ng-deep {
+  .tab-content {
+    color: #666 !important;
+  }
+  .nav {
+    .nav-link {
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}

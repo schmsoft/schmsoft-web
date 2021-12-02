@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-block" *ngIf="businessData">
+    <div class="card-text">
+      <div class="clr-row clr-align-items-start">
+        <div class="clr-col p2">Business Name</div>
+        <div class="clr-col p3">{{ businessData.name }}</div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Business Type</div>
+        <div class="clr-col p3">{{ businessData.businessType }}</div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Category</div>
+        <div class="clr-col p3">{{ businessData.category }}</div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Status</div>
+        <div
+          class="clr-col p3"
+          [ngClass]="{ active: businessData.status.toLowerCase() === 'active' }"
+        >
+          {{ businessData.status }}
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Descriptions</div>
+        <div class="clr-col p3">
+          {{ businessData.description }}
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Registration No.</div>
+        <div class="clr-col p3">{{ businessData.registrationNumber }}</div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col p2">Years In Current Location</div>
+        <div class="clr-col p3">{{ businessData.yearsInCurrentLocation }}</div>
+      </div>
+    </div>
+  </div>
+</div>

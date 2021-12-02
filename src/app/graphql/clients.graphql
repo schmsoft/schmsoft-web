@@ -9,6 +9,9 @@ fragment OwnerFragment on OwnerType {
     lastName
     email
   }
+  business {
+    id
+  }
   identificationMethod
   identificationNumber
   phoneNumber
@@ -17,9 +20,38 @@ fragment OwnerFragment on OwnerType {
   passportPhoto
 }
 
+fragment BusinessFragment on BusinessType {
+  id
+  created
+  modified
+  name
+  description
+  businessType
+  category
+  registrationNumber
+  status
+  yearsInCurrentLocation
+  operatingCapitalCurrency
+  operatingCapital
+  dailySalesCurrency
+  dailySales
+  ownerSet {
+    user {
+      name
+      email
+    }
+  }
+}
+
 query Clients {
   businessOwners {
     ...OwnerFragment
+  }
+}
+
+query Business($id: ID!) {
+  business(id: $id) {
+    ...BusinessFragment
   }
 }
 
