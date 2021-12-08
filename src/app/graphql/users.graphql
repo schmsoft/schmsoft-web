@@ -23,6 +23,15 @@ query StaffUsers {
   }
 }
 
+query BusinessOwners {
+  businessOwners {
+    user {
+      name
+    }
+    phoneNumber
+  }
+}
+
 mutation Login($username: String!, $password: String!) {
   tokenAuth(username: $username, password: $password) {
     token

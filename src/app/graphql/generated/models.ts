@@ -2643,6 +2643,21 @@ export type StaffUsersQuery = {
   >;
 };
 
+export type BusinessOwnersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BusinessOwnersQuery = {
+  __typename?: 'Query';
+  businessOwners?: Maybe<
+    Array<
+      Maybe<{
+        __typename?: 'OwnerType';
+        phoneNumber: string;
+        user: { __typename?: 'UserType'; name?: Maybe<string> };
+      }>
+    >
+  >;
+};
+
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -2969,6 +2984,30 @@ export class StaffUsersGQL extends Apollo.Query<
   StaffUsersQueryVariables
 > {
   document = StaffUsersDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const BusinessOwnersDocument = gql`
+  query BusinessOwners {
+    businessOwners {
+      user {
+        name
+      }
+      phoneNumber
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BusinessOwnersGQL extends Apollo.Query<
+  BusinessOwnersQuery,
+  BusinessOwnersQueryVariables
+> {
+  document = BusinessOwnersDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
