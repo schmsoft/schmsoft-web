@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BusinessOwnersGQL } from '@graphql/generated/models';
+import {
+  BusinessOwnersGQL,
+  SendSmsToNumbersGQL,
+} from '@graphql/generated/models';
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-sms',
@@ -15,7 +18,10 @@ export class SmsComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<boolean>();
 
-  constructor(private businessOwnersGQL: BusinessOwnersGQL) {}
+  constructor(
+    private businessOwnersGQL: BusinessOwnersGQL,
+    private sendSmsToNumbersGQL: SendSmsToNumbersGQL
+  ) {}
 
   ngOnInit(): void {
     this.businessOwnersGQL
@@ -32,6 +38,21 @@ export class SmsComponent implements OnInit, OnDestroy {
           this.users = data;
           console.log(this.users);
         })
+      )
+      .subscribe();
+  }
+
+  sendSms() {
+    const phoneNumbers = this.selectedUsers?.map((user) => user?.value);
+    console.log(phoneNumbers, this.message);
+    this.sendSmsToNumbersGQL
+      .mutate({
+        phoneNumbers,
+        text: this.message,
+      })
+      .pipe(
+        take(1),
+        tap((resp) => console.log(resp))
       )
       .subscribe();
   }

@@ -46,3 +46,9 @@ mutation RefreshToken($refreshToken: String!) {
     refreshToken
   }
 }
+
+mutation SendSmsToNumbers($phoneNumbers: [String], $text: String) {
+  sendSmsToNumbers(phoneNumbers: $phoneNumbers, text: $text) {
+    success
+  }
+}

@@ -43,7 +43,11 @@
         ></textarea>
         <clr-control-helper>Type in the message</clr-control-helper>
       </clr-textarea-container>
-      <button class="btn" [disabled]="textarea.invalid || !selectedUsers">
+      <button
+        class="btn"
+        [disabled]="textarea.invalid || !selectedUsers"
+        (click)="sendSms()"
+      >
         Send Message
       </button>
     </clr-dg-cell>

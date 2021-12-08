@@ -2686,6 +2686,21 @@ export type RefreshTokenMutation = {
   }>;
 };
 
+export type SendSmsToNumbersMutationVariables = Exact<{
+  phoneNumbers?: Maybe<
+    Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>
+  >;
+  text?: Maybe<Scalars['String']>;
+}>;
+
+export type SendSmsToNumbersMutation = {
+  __typename?: 'Mutation';
+  sendSmsToNumbers?: Maybe<{
+    __typename?: 'SmsToNumbersMutation';
+    success?: Maybe<boolean>;
+  }>;
+};
+
 export const OwnerFragmentFragmentDoc = gql`
   fragment OwnerFragment on OwnerType {
     id
@@ -3053,6 +3068,27 @@ export class RefreshTokenGQL extends Apollo.Mutation<
   RefreshTokenMutationVariables
 > {
   document = RefreshTokenDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const SendSmsToNumbersDocument = gql`
+  mutation SendSmsToNumbers($phoneNumbers: [String], $text: String) {
+    sendSmsToNumbers(phoneNumbers: $phoneNumbers, text: $text) {
+      success
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SendSmsToNumbersGQL extends Apollo.Mutation<
+  SendSmsToNumbersMutation,
+  SendSmsToNumbersMutationVariables
+> {
+  document = SendSmsToNumbersDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
