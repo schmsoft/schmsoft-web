@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - http://localhost:8000/graphql:
       headers:
-        Authorization: "JWT SOME-TOKEN"
+        Authorization: "JWT ${SCHMSOFT_AUTH_TOKEN}"
   - http://localhost:8000/graphql-public
 documents: "src/app/**/*.graphql"
 generates:

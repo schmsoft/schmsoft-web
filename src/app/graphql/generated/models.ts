@@ -1464,7 +1464,7 @@ export enum ContactRecordMechanism {
 export type ContactRecordType = {
   __typename?: 'ContactRecordType';
   created: Scalars['DateTime'];
-  definitionKey: Scalars['String'];
+  definitionKey?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   mechanism: ContactRecordMechanism;
   modified: Scalars['DateTime'];
@@ -1476,6 +1476,7 @@ export type ContactRecordType = {
   sentToPhoneNumber: Scalars['String'];
   sentToSlackUsernameOrChannel: Scalars['String'];
   subject: Scalars['String'];
+  succeeded: Scalars['Boolean'];
   textContent: Scalars['String'];
 };
 
@@ -1524,6 +1525,8 @@ export type Mutation = {
   assignPortfolioManager?: Maybe<AssignPortfolioManagerMutation>;
   refreshToken?: Maybe<Refresh>;
   revokeToken?: Maybe<Revoke>;
+  sendSmsToNumbers?: Maybe<SmsToNumbersMutation>;
+  sendSmsToUsers?: Maybe<SmsToUsersMutation>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
   unAssignPortfolioManager?: Maybe<UnAssignPortfolioManagerMutation>;
@@ -1553,6 +1556,16 @@ export type MutationRefreshTokenArgs = {
 
 export type MutationRevokeTokenArgs = {
   refreshToken: Scalars['String'];
+};
+
+export type MutationSendSmsToNumbersArgs = {
+  phoneNumbers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  text?: Maybe<Scalars['String']>;
+};
+
+export type MutationSendSmsToUsersArgs = {
+  text?: Maybe<Scalars['String']>;
+  userIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type MutationTokenAuthArgs = {
@@ -2270,6 +2283,7 @@ export type OwnerType = {
 export type Query = {
   __typename?: 'Query';
   business?: Maybe<BusinessType>;
+  businessContactRecords?: Maybe<Array<Maybe<ContactRecordType>>>;
   businessOwners?: Maybe<Array<Maybe<OwnerType>>>;
   businesses?: Maybe<Array<Maybe<BusinessType>>>;
   contactRecords?: Maybe<Array<Maybe<ContactRecordType>>>;
@@ -2277,11 +2291,20 @@ export type Query = {
   loanPortfolios?: Maybe<Array<Maybe<LoanPortfolioType>>>;
   me?: Maybe<UserType>;
   staffUsers?: Maybe<Array<Maybe<UserType>>>;
+  test?: Maybe<Scalars['String']>;
   users?: Maybe<Array<Maybe<UserType>>>;
 };
 
 export type QueryBusinessArgs = {
   id: Scalars['ID'];
+};
+
+export type QueryBusinessContactRecordsArgs = {
+  businessId: Scalars['ID'];
+};
+
+export type QueryContactRecordsArgs = {
+  userId: Scalars['ID'];
 };
 
 export type QueryLoanPortfolioArgs = {
@@ -2302,6 +2325,16 @@ export type Refresh = {
 export type Revoke = {
   __typename?: 'Revoke';
   revoked?: Maybe<Scalars['Int']>;
+};
+
+export type SmsToNumbersMutation = {
+  __typename?: 'SmsToNumbersMutation';
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type SmsToUsersMutation = {
+  __typename?: 'SmsToUsersMutation';
+  contactRecords?: Maybe<Array<Maybe<ContactRecordType>>>;
 };
 
 export type StateInput = {
@@ -2334,11 +2367,23 @@ export type UserInput = {
 
 export type UserType = {
   __typename?: 'UserType';
+  contactsReceived: Array<ContactRecordType>;
+  contactsSent: Array<ContactRecordType>;
+  dateJoined: Scalars['DateTime'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
+  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
+  isActive: Scalars['Boolean'];
+  /** Designates whether the user can log into this admin site. */
+  isStaff: Scalars['Boolean'];
+  /** Designates that this user has all permissions without explicitly assigning them. */
+  isSuperuser: Scalars['Boolean'];
+  lastLogin?: Maybe<Scalars['DateTime']>;
   lastName: Scalars['String'];
+  loanportfolioSet: Array<LoanPortfolioType>;
   name?: Maybe<Scalars['String']>;
+  owner?: Maybe<OwnerType>;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars['String'];
 };
