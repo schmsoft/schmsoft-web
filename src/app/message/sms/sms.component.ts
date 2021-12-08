@@ -3,7 +3,8 @@ import {
   BusinessOwnersGQL,
   SendSmsToNumbersGQL,
 } from '@graphql/generated/models';
-import { Observable, Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { map, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +21,8 @@ export class SmsComponent implements OnInit, OnDestroy {
 
   constructor(
     private businessOwnersGQL: BusinessOwnersGQL,
-    private sendSmsToNumbersGQL: SendSmsToNumbersGQL
+    private sendSmsToNumbersGQL: SendSmsToNumbersGQL,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,6 @@ export class SmsComponent implements OnInit, OnDestroy {
         ),
         tap((data) => {
           this.users = data;
-          console.log(this.users);
         })
       )
       .subscribe();
@@ -52,7 +53,11 @@ export class SmsComponent implements OnInit, OnDestroy {
       })
       .pipe(
         take(1),
-        tap((resp) => console.log(resp))
+        tap((resp) => {
+          this.selectedUsers = undefined;
+          this.message = '';
+          this.toastr.success('Message Sent Successfully', 'Hurray!!');
+        })
       )
       .subscribe();
   }
