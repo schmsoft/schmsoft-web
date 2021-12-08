@@ -13,22 +13,15 @@
     <clr-dg-cell>
       <clr-combobox-container *ngIf="true">
         <label>Phone Number(s)</label>
-        <clr-combobox
-          [(ngModel)]="selectedUsers"
-          [clrMulti]="true"
-          (clrSelectionChange)="updateSelectedUsers()"
-        >
+        <clr-combobox [(ngModel)]="selectedUsers" [clrMulti]="true">
           <ng-container *clrOptionSelected="let user">
             <clr-icon shape="user" role="img" aria-label="manager"></clr-icon>
-            {{ user?.phone }}
+            {{ user?.label }}
           </ng-container>
           <clr-options>
-            <clr-option
-              *clrOptionItems="let user of users$ | async; field: 'name'"
-              [clrValue]="user"
-            >
+            <clr-option *clrOptionItems="let user of users" [clrValue]="user">
               <clr-icon shape="user" aria-label="manager-icon"></clr-icon>
-              {{ user?.name }}
+              {{ user?.label }} - {{ user?.phoneNumber }}
             </clr-option>
           </clr-options>
         </clr-combobox>
@@ -42,6 +35,7 @@
         <textarea
           clrTextarea
           [(ngModel)]="message"
+          #textarea="ngModel"
           name="message"
           cols="40"
           rows="7"
@@ -49,7 +43,9 @@
         ></textarea>
         <clr-control-helper>Type in the message</clr-control-helper>
       </clr-textarea-container>
-      <button class="btn">Send Message</button>
+      <button class="btn" [disabled]="textarea.invalid || !selectedUsers">
+        Send Message
+      </button>
     </clr-dg-cell>
   </clr-dg-row>
 </clr-datagrid>

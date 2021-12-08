@@ -1,19 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BusinessOwnersGQL } from '@graphql/generated/models';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-sms',
   templateUrl: './sms.component.html',
   styleUrls: ['./sms.component.scss'],
 })
-export class SmsComponent implements OnInit {
+export class SmsComponent implements OnInit, OnDestroy {
   selectedUsers: any[] | undefined;
-  users$: Observable<any> | undefined;
+  users: any;
   message: string = '';
 
-  constructor() {}
+  destroyed$ = new Subject<boolean>();
 
-  ngOnInit(): void {}
+  constructor(private businessOwnersGQL: BusinessOwnersGQL) {}
 
-  updateSelectedUsers() {}
+  ngOnInit(): void {
+    this.businessOwnersGQL
+      .fetch()
+      .pipe(
+        takeUntil(this.destroyed$),
+        map(({ data }) =>
+          data.businessOwners?.map((n) => ({
+            label: n?.user?.name,
+            value: n?.phoneNumber,
+          }))
+        ),
+        tap((data) => {
+          this.users = data;
+          console.log(this.users);
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
+  }
 }
