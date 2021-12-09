@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SendSmsToUsersGQL } from '@graphql/generated/models';
+import { ToastrService } from 'ngx-toastr';
 import { take, tap } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +21,10 @@ export class SmsModalComponent implements OnInit {
   selectedOwners: any[] | undefined;
   message: string = '';
 
-  constructor(private sendsmsToUsersGQl: SendSmsToUsersGQL) {}
+  constructor(
+    private sendsmsToUsersGQl: SendSmsToUsersGQL,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -30,6 +34,7 @@ export class SmsModalComponent implements OnInit {
 
   sendSms() {
     const userIds = this.selectedOwners?.map(({ user }) => user?.id);
+    console.log(userIds, this.message);
     this.sendsmsToUsersGQl
       .mutate({
         text: this.message,
@@ -37,9 +42,13 @@ export class SmsModalComponent implements OnInit {
       })
       .pipe(
         take(1),
-        tap((resp) => {
-          this.handleCloseModal.emit(false);
-          console.log(resp);
+        tap(({ data }) => {
+          this.closeModal();
+          this.toastr.success(
+            'Message has been sent successfully!',
+            'Hurray!!'
+          );
+          console.log(data);
         })
       );
   }
