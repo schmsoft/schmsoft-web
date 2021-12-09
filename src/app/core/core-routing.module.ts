@@ -11,6 +11,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'message',
+    loadChildren: () =>
+      import('@schmsoft/message/message.module').then((m) => m.MessageModule),
+  },
+
+  {
     path: 'settings',
     loadChildren: () =>
       import('@schmsoft/settings/settings.module').then(

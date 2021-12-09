@@ -23,6 +23,15 @@ query StaffUsers {
   }
 }
 
+query BusinessOwners {
+  businessOwners {
+    user {
+      name
+    }
+    phoneNumber
+  }
+}
+
 mutation Login($username: String!, $password: String!) {
   tokenAuth(username: $username, password: $password) {
     token
@@ -35,5 +44,11 @@ mutation RefreshToken($refreshToken: String!) {
     token
     payload
     refreshToken
+  }
+}
+
+mutation SendSmsToNumbers($phoneNumbers: [String], $text: String) {
+  sendSmsToNumbers(phoneNumbers: $phoneNumbers, text: $text) {
+    success
   }
 }

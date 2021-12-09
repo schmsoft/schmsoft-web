@@ -2643,6 +2643,21 @@ export type StaffUsersQuery = {
   >;
 };
 
+export type BusinessOwnersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BusinessOwnersQuery = {
+  __typename?: 'Query';
+  businessOwners?: Maybe<
+    Array<
+      Maybe<{
+        __typename?: 'OwnerType';
+        phoneNumber: string;
+        user: { __typename?: 'UserType'; name?: Maybe<string> };
+      }>
+    >
+  >;
+};
+
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -2668,6 +2683,21 @@ export type RefreshTokenMutation = {
     token?: Maybe<string>;
     payload?: Maybe<any>;
     refreshToken?: Maybe<string>;
+  }>;
+};
+
+export type SendSmsToNumbersMutationVariables = Exact<{
+  phoneNumbers?: Maybe<
+    Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>
+  >;
+  text?: Maybe<Scalars['String']>;
+}>;
+
+export type SendSmsToNumbersMutation = {
+  __typename?: 'Mutation';
+  sendSmsToNumbers?: Maybe<{
+    __typename?: 'SmsToNumbersMutation';
+    success?: Maybe<boolean>;
   }>;
 };
 
@@ -2974,6 +3004,30 @@ export class StaffUsersGQL extends Apollo.Query<
     super(apollo);
   }
 }
+export const BusinessOwnersDocument = gql`
+  query BusinessOwners {
+    businessOwners {
+      user {
+        name
+      }
+      phoneNumber
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BusinessOwnersGQL extends Apollo.Query<
+  BusinessOwnersQuery,
+  BusinessOwnersQueryVariables
+> {
+  document = BusinessOwnersDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const LoginDocument = gql`
   mutation Login($username: String!, $password: String!) {
     tokenAuth(username: $username, password: $password) {
@@ -3014,6 +3068,27 @@ export class RefreshTokenGQL extends Apollo.Mutation<
   RefreshTokenMutationVariables
 > {
   document = RefreshTokenDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const SendSmsToNumbersDocument = gql`
+  mutation SendSmsToNumbers($phoneNumbers: [String], $text: String) {
+    sendSmsToNumbers(phoneNumbers: $phoneNumbers, text: $text) {
+      success
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SendSmsToNumbersGQL extends Apollo.Mutation<
+  SendSmsToNumbersMutation,
+  SendSmsToNumbersMutationVariables
+> {
+  document = SendSmsToNumbersDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
