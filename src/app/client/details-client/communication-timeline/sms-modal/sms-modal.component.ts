@@ -42,14 +42,14 @@ export class SmsModalComponent implements OnInit {
       })
       .pipe(
         take(1),
-        tap(({ data }) => {
+        tap((resp) => {
           this.closeModal();
           this.toastr.success(
             'Message has been sent successfully!',
             'Hurray!!'
           );
-          console.log(data);
         })
-      );
+      )
+      .subscribe();
   }
 }
