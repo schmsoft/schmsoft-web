@@ -31,7 +31,9 @@
   <clr-tab>
     <button clrTabLink>Communication Timeline</button>
     <clr-tab-content *clrIfActive>
-      <ssw-communication-timeline></ssw-communication-timeline
+      <ssw-communication-timeline
+        [ownersData]="ownersData"
+      ></ssw-communication-timeline
     ></clr-tab-content>
   </clr-tab>
 

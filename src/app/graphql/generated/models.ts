@@ -2433,7 +2433,12 @@ export type BusinessFragmentFragment = {
   dailySales?: Maybe<string>;
   ownerSet: Array<{
     __typename?: 'OwnerType';
-    user: { __typename?: 'UserType'; name?: Maybe<string>; email: string };
+    user: {
+      __typename?: 'UserType';
+      id: string;
+      name?: Maybe<string>;
+      email: string;
+    };
   }>;
 };
 
@@ -2492,7 +2497,12 @@ export type BusinessQuery = {
     dailySales?: Maybe<string>;
     ownerSet: Array<{
       __typename?: 'OwnerType';
-      user: { __typename?: 'UserType'; name?: Maybe<string>; email: string };
+      user: {
+        __typename?: 'UserType';
+        id: string;
+        name?: Maybe<string>;
+        email: string;
+      };
     }>;
   }>;
 };
@@ -2671,6 +2681,26 @@ export type RefreshTokenMutation = {
   }>;
 };
 
+export type SendSmsToUsersMutationVariables = Exact<{
+  text?: Maybe<Scalars['String']>;
+  userIds?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
+}>;
+
+export type SendSmsToUsersMutation = {
+  __typename?: 'Mutation';
+  sendSmsToUsers?: Maybe<{
+    __typename?: 'SmsToUsersMutation';
+    contactRecords?: Maybe<
+      Array<
+        Maybe<{
+          __typename?: 'ContactRecordType';
+          sentTo: { __typename?: 'UserType'; name?: Maybe<string> };
+        }>
+      >
+    >;
+  }>;
+};
+
 export const OwnerFragmentFragmentDoc = gql`
   fragment OwnerFragment on OwnerType {
     id
@@ -2712,6 +2742,7 @@ export const BusinessFragmentFragmentDoc = gql`
     dailySales
     ownerSet {
       user {
+        id
         name
         email
       }
@@ -3014,6 +3045,31 @@ export class RefreshTokenGQL extends Apollo.Mutation<
   RefreshTokenMutationVariables
 > {
   document = RefreshTokenDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const SendSmsToUsersDocument = gql`
+  mutation SendSmsToUsers($text: String, $userIds: [ID]) {
+    sendSmsToUsers(text: $text, userIds: $userIds) {
+      contactRecords {
+        sentTo {
+          name
+        }
+      }
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SendSmsToUsersGQL extends Apollo.Mutation<
+  SendSmsToUsersMutation,
+  SendSmsToUsersMutationVariables
+> {
+  document = SendSmsToUsersDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

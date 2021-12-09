@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ssw-communication-timeline',
@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./communication-timeline.component.scss'],
 })
 export class CommunicationTimelineComponent implements OnInit {
+  @Input()
+  ownersData: any[] | undefined;
+
   openModal: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}

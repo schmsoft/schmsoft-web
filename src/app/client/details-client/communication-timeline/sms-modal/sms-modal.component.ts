@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SendSmsToUsersGQL } from '@graphql/generated/models';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ssw-sms-modal',
@@ -9,14 +11,16 @@ export class SmsModalComponent implements OnInit {
   @Input()
   openModal: boolean = false;
 
+  @Input()
+  ownersData: any | undefined;
+
   @Output()
   handleCloseModal = new EventEmitter<boolean>();
 
   selectedOwners: any[] | undefined;
-  owners: any | undefined;
   message: string = '';
 
-  constructor() {}
+  constructor(private sendsmsToUsersGQl: SendSmsToUsersGQL) {}
 
   ngOnInit(): void {}
 
@@ -24,5 +28,19 @@ export class SmsModalComponent implements OnInit {
     this.handleCloseModal.emit(false);
   }
 
-  sendSms() {}
+  sendSms() {
+    const userIds = this.selectedOwners?.map(({ user }) => user?.id);
+    this.sendsmsToUsersGQl
+      .mutate({
+        text: this.message,
+        userIds,
+      })
+      .pipe(
+        take(1),
+        tap((resp) => {
+          this.handleCloseModal.emit(false);
+          console.log(resp);
+        })
+      );
+  }
 }

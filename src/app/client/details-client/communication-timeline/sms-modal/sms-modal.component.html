@@ -18,15 +18,15 @@
                     role="img"
                     aria-label="manager"
                   ></clr-icon>
-                  {{ owner?.label }}
+                  {{ owner?.user?.name }}
                 </ng-container>
                 <clr-options>
                   <clr-option
-                    *clrOptionItems="let owner of owners"
+                    *clrOptionItems="let owner of ownersData"
                     [clrValue]="owner"
                   >
                     <clr-icon shape="user" aria-label="manager-icon"></clr-icon>
-                    {{ owner?.label }} - {{ owner?.phoneNumber }}
+                    {{ owner?.user?.name }}
                   </clr-option>
                 </clr-options>
               </clr-combobox>

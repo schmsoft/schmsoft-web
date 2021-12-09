@@ -37,3 +37,13 @@ mutation RefreshToken($refreshToken: String!) {
     refreshToken
   }
 }
+
+mutation SendSmsToUsers($text: String, $userIds: [ID]) {
+  sendSmsToUsers(text: $text, userIds: $userIds) {
+    contactRecords {
+      sentTo {
+        name
+      }
+    }
+  }
+}
