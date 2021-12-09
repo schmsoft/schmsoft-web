@@ -8,7 +8,7 @@ import { take, tap } from 'rxjs/operators';
   templateUrl: './sms-modal.component.html',
   styleUrls: ['./sms-modal.component.scss'],
 })
-export class SmsModalComponent implements OnInit {
+export class SmsModalComponent {
   @Input()
   openModal: boolean = false;
 
@@ -25,8 +25,6 @@ export class SmsModalComponent implements OnInit {
     private sendsmsToUsersGQl: SendSmsToUsersGQL,
     private toastr: ToastrService
   ) {}
-
-  ngOnInit(): void {}
 
   closeModal() {
     this.handleCloseModal.emit(false);

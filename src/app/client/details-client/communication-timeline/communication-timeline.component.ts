@@ -5,13 +5,11 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './communication-timeline.component.html',
   styleUrls: ['./communication-timeline.component.scss'],
 })
-export class CommunicationTimelineComponent implements OnInit {
+export class CommunicationTimelineComponent {
   @Input()
   ownersData: any[] | undefined;
 
   openModal: boolean = false;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
