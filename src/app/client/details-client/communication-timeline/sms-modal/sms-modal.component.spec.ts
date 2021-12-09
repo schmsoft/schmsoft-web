@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 import { SmsModalComponent } from './sms-modal.component';
 
@@ -9,6 +11,7 @@ describe('SmsModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SmsModalComponent],
+      imports: [ToastrModule.forRoot(), FormsModule],
     }).compileComponents();
   });
 
