@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { OwnersDetailsModule } from './owners-details/owners-details.module';
 import { BusinessDetailsModule } from './business-details/business-details.module';
 import { SalesDetailsModule } from './sales-details/sales-details.module';
+import { CommunicationTimelineModule } from './communication-timeline/communication-timeline.module';
 
 @NgModule({
   declarations: [DetailsClientComponent],
@@ -17,6 +18,7 @@ import { SalesDetailsModule } from './sales-details/sales-details.module';
     OwnersDetailsModule,
     BusinessDetailsModule,
     SalesDetailsModule,
+    CommunicationTimelineModule,
     RouterModule,
   ],
   exports: [DetailsClientComponent],

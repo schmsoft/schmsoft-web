@@ -37,6 +37,7 @@ fragment BusinessFragment on BusinessType {
   dailySales
   ownerSet {
     user {
+      id
       name
       email
     }
