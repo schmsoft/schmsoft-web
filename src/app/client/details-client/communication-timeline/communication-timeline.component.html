@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-block">
     <div class="card-header">
-      <button class="btn btn-sm">Send message</button>
+      <button class="btn btn-sm" (click)="openModal = true">
+        Send message
+      </button>
     </div>
     <div class="card-block">
       <div class="card-text">
@@ -12,3 +14,8 @@
     </div>
   </div>
 </div>
+
+<ssw-sms-modal
+  [openModal]="openModal"
+  (handleCloseModal)="openModal = $event"
+></ssw-sms-modal>

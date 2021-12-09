@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./communication-timeline.component.scss'],
 })
 export class CommunicationTimelineComponent implements OnInit {
+  openModal: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
