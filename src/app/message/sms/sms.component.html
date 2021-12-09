@@ -13,7 +13,11 @@
     <clr-dg-cell>
       <clr-combobox-container *ngIf="true">
         <label>Phone Number(s)</label>
-        <clr-combobox [(ngModel)]="selectedUsers" [clrMulti]="true">
+        <clr-combobox
+          [(ngModel)]="selectedUsers"
+          [clrMulti]="true"
+          ngDefaultControl
+        >
           <ng-container *clrOptionSelected="let user">
             <clr-icon shape="user" role="img" aria-label="manager"></clr-icon>
             {{ user?.label }}
