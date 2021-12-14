@@ -2438,6 +2438,7 @@ export type BusinessFragmentFragment = {
       id: string;
       name?: Maybe<string>;
       email: string;
+      owner?: Maybe<{ __typename?: 'OwnerType'; phoneNumber: string }>;
     };
   }>;
 };
@@ -2502,6 +2503,7 @@ export type BusinessQuery = {
         id: string;
         name?: Maybe<string>;
         email: string;
+        owner?: Maybe<{ __typename?: 'OwnerType'; phoneNumber: string }>;
       };
     }>;
   }>;
@@ -2775,6 +2777,9 @@ export const BusinessFragmentFragmentDoc = gql`
         id
         name
         email
+        owner {
+          phoneNumber
+        }
       }
     }
   }

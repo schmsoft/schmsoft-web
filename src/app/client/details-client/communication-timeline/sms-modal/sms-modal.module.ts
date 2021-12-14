@@ -9,6 +9,7 @@ import {
   ClrTextareaModule,
 } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
+import { SmsModule } from '@schmsoft/message/sms/sms.module';
 
 @NgModule({
   declarations: [SmsModalComponent],
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     ClrDatagridModule,
     ClrTextareaModule,
     FormsModule,
+    SmsModule,
   ],
   exports: [SmsModalComponent],
 })

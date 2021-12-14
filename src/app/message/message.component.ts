@@ -51,8 +51,9 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(data: any) {
+    const phoneNumbers = data.users?.map((user: any) => user?.value);
     this.sendSmsToNumbersGQL
-      .mutate(data)
+      .mutate({ phoneNumbers, text: data.text })
       .pipe(
         take(1),
         tap((resp) => {

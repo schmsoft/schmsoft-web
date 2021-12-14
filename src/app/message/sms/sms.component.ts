@@ -30,8 +30,7 @@ export class SmsComponent {
 
   sendSms() {
     this.validateBtnState = ClrLoadingState.LOADING;
-    const phoneNumbers = this.selectedUsers?.map((user) => user?.value);
-    this.handleSendSms.emit({ phoneNumbers, text: this.message });
+    this.handleSendSms.emit({ users: this.selectedUsers, text: this.message });
   }
 
   inputChange(value: any) {
