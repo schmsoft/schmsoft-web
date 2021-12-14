@@ -1,0 +1,14 @@
+<clr-timeline class="clr-timeline-vertical" *ngIf="contactRecords">
+  <clr-timeline-step *ngFor="let record of contactRecords">
+    <clr-timeline-step-header>{{
+      record.created | date: "'d/M/yy, h:mm a"
+    }}</clr-timeline-step-header>
+    <clr-icon shape="circle" aria-label="Not started"></clr-icon>
+    <clr-timeline-step-title>
+      {{ record.sentTo.name }} - {{ record.sentTo.owner.phoneNumber }}
+    </clr-timeline-step-title>
+    <clr-timeline-step-description>{{
+      record.textContent
+    }}</clr-timeline-step-description>
+  </clr-timeline-step>
+</clr-timeline>

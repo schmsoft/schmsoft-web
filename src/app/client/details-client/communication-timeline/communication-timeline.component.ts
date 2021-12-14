@@ -9,6 +9,9 @@ export class CommunicationTimelineComponent {
   @Input()
   ownersData: any[] | undefined;
 
+  @Input()
+  contactRecords: any[] = [];
+
   openModal: boolean = false;
 
   constructor() {}

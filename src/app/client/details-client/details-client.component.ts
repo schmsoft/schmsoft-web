@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessGQL } from '@graphql/generated/models';
-import { Subject } from 'rxjs';
+import {
+  BusinessContactRecordsGQL,
+  BusinessGQL,
+} from '@graphql/generated/models';
+import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +17,7 @@ export class DetailsClientComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<boolean>();
 
-  /* OWNERSDATA, BUSINESSDATA and SALESDATA are used as inputs in:
+  /* OWNERSDATA, BUSINESSDATA, SALESDATA, CONTACTRECORDS are used as inputs in:
    * Owners-details module
    * Business-details module
    * Sales-details module
@@ -23,9 +26,11 @@ export class DetailsClientComponent implements OnInit, OnDestroy {
   ownersData: any[] | undefined;
   businessData: any | undefined;
   salesData: any | undefined;
+  contactRecords$: Observable<any> | undefined;
 
   constructor(
     private businessGQL: BusinessGQL,
+    private businessContactRecordsGQL: BusinessContactRecordsGQL,
     private route: ActivatedRoute
   ) {}
 
@@ -58,6 +63,14 @@ export class DetailsClientComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
+    // CONTACT RECORDS USED IN COMMUNICATION TIMELINE TAB
+    this.contactRecords$ = this.businessContactRecordsGQL
+      .fetch({ businessID: this.businessId })
+      .pipe(
+        map(({ data }) => data?.businessContactRecords),
+        tap((data) => console.log(data))
+      );
   }
 
   ngOnDestroy(): void {
