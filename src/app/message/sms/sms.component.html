@@ -16,6 +16,7 @@
         <clr-combobox
           [(ngModel)]="selectedUsers"
           [clrMulti]="true"
+          (clrInputChange)="inputChange($event)"
           ngDefaultControl
         >
           <ng-container *clrOptionSelected="let user">
@@ -51,6 +52,7 @@
         class="btn"
         [disabled]="textarea.invalid || !selectedUsers"
         (click)="sendSms()"
+        [clrLoading]="validateBtnState"
       >
         Send Message
       </button>

@@ -6,6 +6,8 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, take, takeUntil, tap } from 'rxjs/operators';
+import { PhoneNumberUtil } from 'google-libphonenumber';
+import { ClrLoadingState } from '@clr/angular';
 
 @Component({
   selector: 'ssw-sms',
@@ -14,10 +16,13 @@ import { map, take, takeUntil, tap } from 'rxjs/operators';
 })
 export class SmsComponent implements OnInit, OnDestroy {
   selectedUsers: any[] | undefined;
-  users: any;
+  users: any = [];
   message: string = '';
+  validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
 
   destroyed$ = new Subject<boolean>();
+
+  phoneNumberUtil = PhoneNumberUtil.getInstance();
 
   constructor(
     private businessOwnersGQL: BusinessOwnersGQL,
@@ -44,8 +49,8 @@ export class SmsComponent implements OnInit, OnDestroy {
   }
 
   sendSms() {
+    this.validateBtnState = ClrLoadingState.LOADING;
     const phoneNumbers = this.selectedUsers?.map((user) => user?.value);
-    console.log(phoneNumbers, this.message);
     this.sendSmsToNumbersGQL
       .mutate({
         phoneNumbers,
@@ -55,11 +60,26 @@ export class SmsComponent implements OnInit, OnDestroy {
         take(1),
         tap((resp) => {
           this.selectedUsers = undefined;
-          this.message = '';
+          this.message = ' ';
+          this.validateBtnState = ClrLoadingState.SUCCESS;
           this.toastr.success('Message Sent Successfully', 'Hurray!!');
         })
       )
       .subscribe();
+  }
+
+  inputChange(value: any) {
+    try {
+      const phoneNumber = this.phoneNumberUtil.parse(value, 'KE');
+      const nationalNumber = phoneNumber.getNationalNumberOrDefault();
+      const validNumber = this.phoneNumberUtil.isValidNumber(phoneNumber);
+      if (
+        validNumber &&
+        !this.users.some((user: any) => user?.value.includes(nationalNumber))
+      ) {
+        this.users = [...this.users, { label: value, value }];
+      }
+    } catch (e) {}
   }
 
   ngOnDestroy() {
