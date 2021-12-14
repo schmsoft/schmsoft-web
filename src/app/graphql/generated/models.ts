@@ -2443,6 +2443,22 @@ export type BusinessFragmentFragment = {
   }>;
 };
 
+export type BusinessContactRecordsFragmentFragment = {
+  __typename?: 'ContactRecordType';
+  id: string;
+  textContent: string;
+  created: any;
+  sentTo: {
+    __typename?: 'UserType';
+    name?: Maybe<string>;
+    owner?: Maybe<{
+      __typename?: 'OwnerType';
+      phoneNumber: string;
+      user: { __typename?: 'UserType'; name?: Maybe<string> };
+    }>;
+  };
+};
+
 export type ClientsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type ClientsQuery = {
@@ -2507,6 +2523,33 @@ export type BusinessQuery = {
       };
     }>;
   }>;
+};
+
+export type BusinessContactRecordsQueryVariables = Exact<{
+  businessID: Scalars['ID'];
+}>;
+
+export type BusinessContactRecordsQuery = {
+  __typename?: 'Query';
+  businessContactRecords?: Maybe<
+    Array<
+      Maybe<{
+        __typename?: 'ContactRecordType';
+        id: string;
+        textContent: string;
+        created: any;
+        sentTo: {
+          __typename?: 'UserType';
+          name?: Maybe<string>;
+          owner?: Maybe<{
+            __typename?: 'OwnerType';
+            phoneNumber: string;
+            user: { __typename?: 'UserType'; name?: Maybe<string> };
+          }>;
+        };
+      }>
+    >
+  >;
 };
 
 export type RegisterClientMutationVariables = Exact<{
@@ -2784,6 +2827,22 @@ export const BusinessFragmentFragmentDoc = gql`
     }
   }
 `;
+export const BusinessContactRecordsFragmentFragmentDoc = gql`
+  fragment BusinessContactRecordsFragment on ContactRecordType {
+    id
+    textContent
+    created
+    sentTo {
+      name
+      owner {
+        phoneNumber
+        user {
+          name
+        }
+      }
+    }
+  }
+`;
 export const ClientsDocument = gql`
   query Clients {
     businessOwners {
@@ -2823,6 +2882,28 @@ export class BusinessGQL extends Apollo.Query<
   BusinessQueryVariables
 > {
   document = BusinessDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const BusinessContactRecordsDocument = gql`
+  query BusinessContactRecords($businessID: ID!) {
+    businessContactRecords(businessId: $businessID) {
+      ...BusinessContactRecordsFragment
+    }
+  }
+  ${BusinessContactRecordsFragmentFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BusinessContactRecordsGQL extends Apollo.Query<
+  BusinessContactRecordsQuery,
+  BusinessContactRecordsQueryVariables
+> {
+  document = BusinessContactRecordsDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
