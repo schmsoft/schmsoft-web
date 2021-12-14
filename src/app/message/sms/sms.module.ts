@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SmsComponent } from './sms.component';
 import {
+  ClrButtonModule,
   ClrComboboxModule,
   ClrDatagridModule,
   ClrIconModule,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
   ClrTextareaModule,
 } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +20,8 @@ import { FormsModule } from '@angular/forms';
     ClrIconModule,
     ClrDatagridModule,
     ClrTextareaModule,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
     FormsModule,
   ],
   exports: [SmsComponent],

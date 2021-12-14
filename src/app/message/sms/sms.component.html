@@ -1,13 +1,3 @@
-<h1 class="page-header">Send Message</h1>
-<h2 class="p3">
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dolores
-  voluptatem modi amet cum iusto itaque velit minus? Eaque fugiat fugit sit,
-  consectetur earum iure assumenda? Unde fugit ducimus aperiam. Laudantium,
-  suscipit officia esse hic ex consequuntur optio, quia quo ullam earum
-  consectetur deserunt aliquam eligendi iste labore totam perspiciatis quibusdam
-  dolorum dolore deleniti molestiae ipsum temporibus! Atque, dolorem facere?
-</h2>
-
 <clr-datagrid>
   <clr-dg-row>
     <clr-dg-cell>
@@ -16,6 +6,7 @@
         <clr-combobox
           [(ngModel)]="selectedUsers"
           [clrMulti]="true"
+          (clrInputChange)="inputChange($event)"
           ngDefaultControl
         >
           <ng-container *clrOptionSelected="let user">
@@ -25,7 +16,7 @@
           <clr-options>
             <clr-option *clrOptionItems="let user of users" [clrValue]="user">
               <clr-icon shape="user" aria-label="manager-icon"></clr-icon>
-              {{ user?.label }} - {{ user?.phoneNumber }}
+              {{ user?.label }}
             </clr-option>
           </clr-options>
         </clr-combobox>
@@ -51,6 +42,7 @@
         class="btn"
         [disabled]="textarea.invalid || !selectedUsers"
         (click)="sendSms()"
+        [clrLoading]="validateBtnState"
       >
         Send Message
       </button>

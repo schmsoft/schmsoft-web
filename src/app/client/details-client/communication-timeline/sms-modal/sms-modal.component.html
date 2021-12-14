@@ -2,68 +2,13 @@
   <h3 class="modal-title">Send Message to Business Owners</h3>
   <div class="modal-body">
     <p>
-      <clr-datagrid>
-        <clr-dg-row>
-          <clr-dg-cell>
-            <clr-combobox-container *ngIf="true">
-              <label>Phone Number(s)</label>
-              <clr-combobox
-                [(ngModel)]="selectedOwners"
-                ngDefaultControl
-                [clrMulti]="true"
-                ngDefaultControl
-              >
-                <ng-container *clrOptionSelected="let owner">
-                  <clr-icon
-                    shape="user"
-                    role="img"
-                    aria-label="manager"
-                  ></clr-icon>
-                  {{ owner?.user?.name }}
-                </ng-container>
-                <clr-options>
-                  <clr-option
-                    *clrOptionItems="let owner of ownersData"
-                    [clrValue]="owner"
-                  >
-                    <clr-icon shape="user" aria-label="manager-icon"></clr-icon>
-                    {{ owner?.user?.name }}
-                  </clr-option>
-                </clr-options>
-              </clr-combobox>
-              <clr-control-helper
-                >Type phone number and select from the dropdown
-                list</clr-control-helper
-              >
-            </clr-combobox-container>
-            <clr-textarea-container>
-              <label>Message</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="message"
-                #textarea="ngModel"
-                name="message"
-                cols="40"
-                rows="7"
-                required
-              ></textarea>
-              <clr-control-helper>Type in the message</clr-control-helper>
-            </clr-textarea-container>
-          </clr-dg-cell>
-        </clr-dg-row>
-      </clr-datagrid>
+      <ssw-sms
+        [users]="users"
+        [message]="message"
+        [selectedUsers]="selectedOwners"
+        [validateBtnState]="validateBtnState"
+        (handleSendSms)="sendSms($event)"
+      ></ssw-sms>
     </p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="closeModal()">
-      Cancel
-    </button>
-    <button
-      class="btn"
-      [disabled]="textarea.invalid || !selectedOwners"
-      (click)="sendSms()"
-    >
-      Send Message
-    </button>
   </div>
 </clr-modal>

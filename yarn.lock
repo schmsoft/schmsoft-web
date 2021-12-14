@@ -1971,6 +1971,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/google-libphonenumber@^7.4.23":
+  "integrity" "sha512-C3ydakLTQa8HxtYf9ge4q6uT9krDX8smSIxmmW3oACFi5g5vv6T068PRExF7UyWbWpuYiDG8Nm24q2X5XhcZWw=="
+  "resolved" "https://registry.npmjs.org/@types/google-libphonenumber/-/google-libphonenumber-7.4.23.tgz"
+  "version" "7.4.23"
+
 "@types/jasmine@~3.8.0":
   "integrity" "sha512-u5h7dqzy2XpXTzhOzSNQUQpKGFvROF8ElNX9P/TJvsHnTg/JvsAseVsGWQAQQldqanYaM+5kwxW909BBFAUYsg=="
   "resolved" "https://registry.npmjs.org/@types/jasmine/-/jasmine-3.8.2.tgz"
@@ -5100,6 +5105,11 @@
     "object-assign" "^4.0.1"
     "pify" "^2.0.0"
     "pinkie-promise" "^2.0.0"
+
+"google-libphonenumber@^3.2.25":
+  "integrity" "sha512-M/b5mij5o2aGnbe+Id9O3847jBtP0baW61foFkevxBxbuV4LH9AcujjYLd2UVkUPKVdMpKyBZxfeNwdxqobQFQ=="
+  "resolved" "https://registry.npmjs.org/google-libphonenumber/-/google-libphonenumber-3.2.25.tgz"
+  "version" "3.2.25"
 
 "got@^9.6.0":
   "integrity" "sha512-R7eWptXuGYxwijs0eV+v3o6+XH1IqVK8dJOEecQfTmkncw9AV4dcw/Dhxi8MdlqPthxxpZyizMzyg8RTmEsG+Q=="

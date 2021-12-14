@@ -18,6 +18,7 @@ export class DetailsClientComponent implements OnInit, OnDestroy {
    * Owners-details module
    * Business-details module
    * Sales-details module
+   * Communication-timeline module
    */
   ownersData: any[] | undefined;
   businessData: any | undefined;

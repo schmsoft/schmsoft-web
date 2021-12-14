@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SmsComponent } from './sms/sms.component';
+import { MessageComponent } from './message.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SmsComponent,
+    component: MessageComponent,
   },
 ];
 
