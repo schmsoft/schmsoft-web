@@ -30,7 +30,7 @@ export class SmsModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.users = this.ownersData.map((n: any) => ({
+    this.users = this.ownersData?.map((n: any) => ({
       id: n?.user?.id,
       label: n?.user?.name,
       value: n?.user?.owner?.phoneNumber,
