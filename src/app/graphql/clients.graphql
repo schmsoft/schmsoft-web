@@ -47,6 +47,21 @@ fragment BusinessFragment on BusinessType {
   }
 }
 
+fragment BusinessContactRecordsFragment on ContactRecordType {
+  id
+  textContent
+  created
+  sentTo {
+    name
+    owner {
+      phoneNumber
+      user {
+        name
+      }
+    }
+  }
+}
+
 query Clients {
   businessOwners {
     ...OwnerFragment
@@ -56,6 +71,12 @@ query Clients {
 query Business($id: ID!) {
   business(id: $id) {
     ...BusinessFragment
+  }
+}
+
+query BusinessContactRecords($businessID: ID!) {
+  businessContactRecords(businessId: $businessID) {
+    ...BusinessContactRecordsFragment
   }
 }
 
