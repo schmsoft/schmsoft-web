@@ -26,7 +26,7 @@ export class DetailsClientComponent implements OnInit, OnDestroy {
   ownersData: any[] | undefined;
   businessData: any | undefined;
   salesData: any | undefined;
-  contactRecords$: Observable<any> | undefined;
+  contactRecords: any | undefined;
 
   constructor(
     private businessGQL: BusinessGQL,
@@ -65,12 +65,24 @@ export class DetailsClientComponent implements OnInit, OnDestroy {
       .subscribe();
 
     // CONTACT RECORDS USED IN COMMUNICATION TIMELINE TAB
-    this.contactRecords$ = this.businessContactRecordsGQL
+    this.getContactRecords();
+  }
+
+  getContactRecords() {
+    this.businessContactRecordsGQL
       .fetch({ businessID: this.businessId })
       .pipe(
+        takeUntil(this.destroyed$),
         map(({ data }) => data?.businessContactRecords),
-        tap((data) => console.log(data))
-      );
+        tap((data) => {
+          this.contactRecords = data;
+        })
+      )
+      .subscribe();
+  }
+
+  onRecordChange() {
+    this.getContactRecords();
   }
 
   ngOnDestroy(): void {

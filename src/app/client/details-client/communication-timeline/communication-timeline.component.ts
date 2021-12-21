@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'ssw-communication-timeline',
@@ -14,5 +14,13 @@ export class CommunicationTimelineComponent {
 
   openModal: boolean = false;
 
+  @Output()
+  handleRecordChange = new EventEmitter<any>();
+
   constructor() {}
+
+  closeModal(event: boolean) {
+    this.openModal = event;
+    this.handleRecordChange.emit();
+  }
 }

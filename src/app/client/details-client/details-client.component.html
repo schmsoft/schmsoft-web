@@ -33,7 +33,8 @@
     <clr-tab-content *clrIfActive>
       <ssw-communication-timeline
         [ownersData]="ownersData"
-        [contactRecords]="contactRecords$ | async"
+        [contactRecords]="contactRecords"
+        (handleRecordChange)="onRecordChange()"
       ></ssw-communication-timeline
     ></clr-tab-content>
   </clr-tab>
